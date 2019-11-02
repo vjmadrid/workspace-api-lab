@@ -1,0 +1,12 @@
+server:
+   port: 8092
+   
+spring:
+   profiles:
+      active: dev
+   main:
+      banner-mode: off
+  
+invoke:
+   url: https://yesno.wtf
+   path: /api/

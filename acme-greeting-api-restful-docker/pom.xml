@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.acme.greeting.api.restful</groupId>
-	<artifactId>acme-greeting-api-restful</artifactId>
+	<groupId>com.acme.greeting.api.restful.docker</groupId>
+	<artifactId>acme-greeting-api-restful-docker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>acme-greeting-api-restful</name>
+	<name>acme-greeting-api-restful-docker</name>
 	<description></description>
 
 	<parent>
@@ -19,7 +19,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>com.acme.greeting.api.restful.Application</start-class>
+		<start-class>com.acme.greeting.api.restful.docker.Application</start-class>
 	</properties>
 
 	<dependencies>
@@ -41,7 +41,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -71,7 +71,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+
 			<plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <executions>

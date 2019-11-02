@@ -1,19 +1,12 @@
-# acme-greeting-api-restful
+# acme-greeting-api-restful-docker
 
-This project represents a basic API REST with **Hello World (Greeting)**
+This project represents a basic API REST with **Hello World (Greeting)** with **Docker**
 
 Invoke : localhost:<port>/greeting
 
 And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
 
 This projects stands out for:
-
-* Provides **Configuration classes** : Classes to configure the project (scanning package,...)
-* Provides **Constant classes** : Classes to configure the project
-* Provides **Basic classes** : Controller and Entity
-* Provides **Properties Configuration File** (application.yml)
-* Provides **Log Configuration File** (logback.yml)
-
 
 ## Technological Stack
 
@@ -40,6 +33,7 @@ Define what elements are needed to install the software
 
 * Java 8 installed (1.5+ version required)
 * Maven installed  (3+)
+* Docker installed (19+)
 
 
 ## Installation
@@ -68,26 +62,38 @@ Execute with IDE or maven
 
 ## Deploy
 
-Spring Boot
-
-### Deploy Method 1
-
-1. Execute Application.java File
-
-
-### Deploy Method 2
+Dockerize (Spring Boot + Docker)
 
 1. Execute the following command
 
 ```bash
-mvn package && java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
+mvn clean install
+```
+
+2. Verify exist target/<artifact>
+
+3. Execute the following command
+
+Create a Docker image File
+
+```bash
+docker build -t acme/acme-greeting-api-restful-docker .
+```
+
+4. Verify exist image created
+
+5. Execute the following command
+
+Create a Docker container
+
+```bash
+docker run -p 8091:8091 -t acme/acme-greeting-api-restful-docker
 ```
 
 
 ## Use
 
 Important : Beware of the configured port
-
 
 ### Use Browser
 
@@ -117,12 +123,18 @@ And return JSON
 
 ### Use "curl"
 
-Use the "curl"
+User the "curl"
 
 
 ## Use Actuators Endpoints
 
-N/A
+Important : Beware of the configured port
+
+The actuators endpoints are configured in the application.yml
+* Port : 8091
+* Based-path : /manage
+
+Example : http://localhost:8091/manage/info
 
 
 ## Versioning

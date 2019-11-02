@@ -1,19 +1,18 @@
-# acme-greeting-api-restful
+# acme-message-invoke-api
 
-This project represents a basic API REST with **Hello World (Greeting)**
+This project represents a basic API REST with **[yesno.wtf](https://yesno.wtf/)**
 
-Invoke : localhost:<port>/greeting
+Invoke : localhost:<port>/message
 
-And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
+And you receive : {"answer":"???","forced":false,"image":"??"}
 
 This projects stands out for:
 
-* Provides **Configuration classes** : Classes to configure the project (scanning package,...)
+* Provides **Configuration classes** : Classes to configure the project (scanning package,Custom Properties...)
 * Provides **Constant classes** : Classes to configure the project
-* Provides **Basic classes** : Controller and Entity
+* Provides **Basic classes** : Controller and Service
 * Provides **Properties Configuration File** (application.yml)
 * Provides **Log Configuration File** (logback.yml)
-
 
 ## Technological Stack
 
@@ -61,68 +60,55 @@ The result will be the generation of an artifact in your Maven repository (local
 
 ## Testing
 
-This project has tests : Unit + Integration
-
-Execute with IDE or maven
+This project has tests
 
 
 ## Deploy
 
 Spring Boot
 
-### Deploy Method 1
+1. Execute Application.java
 
-1. Execute Application.java File
-
-
-### Deploy Method 2
-
-1. Execute the following command
+2. Execute the following command
 
 ```bash
-mvn package && java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
+mvn package && java -jar target/acme-message-invoke-api-0.0.1-SNAPSHOT.jar
 ```
-
 
 ## Use
 
-Important : Beware of the configured port
-
-
-### Use Browser
-
 The service will accept HTTP GET requests at :
 
 ```bash
-http://localhost:8091/greeting
+http://localhost:8090/greeting
 ```
 
 And return JSON
 
 ```bash
-{"id":1,"content":"Hello, World!","responseTime":"???"}
+{"id":1,"content":"Hello, World!"}
 ```
 
 The service will accept HTTP GET requests at :
 
 ```bash
-http://localhost:8091/greeting?name=Acme
+http://localhost:8090/greeting?name=Acme
 ```
 
 And return JSON
 
 ```bash
-{"id":1,"content":"Hello, Acme!","responseTime":"???"}
+{"id":1,"content":"Hello, Acme!"}
 ```
 
-### Use "curl"
-
-Use the "curl"
+User the "curl"
 
 
-## Use Actuators Endpoints
+## Actuators Endpoints
 
-N/A
+http://localhost:8091/beans
+http://localhost:8091/metrics
+http://localhost:8091/info
 
 
 ## Versioning
