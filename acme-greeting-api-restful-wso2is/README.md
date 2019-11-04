@@ -1,10 +1,18 @@
-# acme-greeting-api-restful-docker-tomcat
+# acme-greeting-api-restful-wso2is
 
-This project represents a basic API REST with **Hello World (Greeting)** with **Docker / Tomcat**
+This project represents a basic API REST with **Hello World (Greeting)**
 
 Invoke : localhost:<port>/greeting
 
 And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
+
+This projects stands out for:
+
+* Provides **Configuration classes** : Classes to configure the project (scanning package,...)
+* Provides **Constant classes** : Classes to configure the project
+* Provides **Basic classes** : Controller and Entity
+* Provides **Properties Configuration File** (application.yml)
+* Provides **Log Configuration File** (logback.yml)
 
 
 ## Technological Stack
@@ -13,7 +21,6 @@ And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
 * [Maven 3](https://maven.apache.org/) - Dependency Management
 * [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
 * [Spring](https://spring.io)
-* [Tomcat 8.5](http://tomcat.apache.org) : Servlet Container
 
 Dependencies with architecture projects
 
@@ -24,7 +31,6 @@ Third Party Dependencies
 * **spring-boot-starter** [2.2.0.RELEASE] : Spring Boot + Spring Framework
 * **spring-boot-starter-test** [2.2.0.RELEASE] : Spring Boot testing library
 * **spring-boot-starter-web** [2.2.0.RELEASE] : Spring Boot web library
-* **spring-boot-starter-tomcat** [2.2.0.RELEASE] : Spring Boot Tomcat library
 * **spring-boot-devtools** [2.2.0.RELEASE] : Spring Boot Dev tools Library
 
 
@@ -34,7 +40,6 @@ Define what elements are needed to install the software
 
 * Java 8 installed (1.5+ version required)
 * Maven installed  (3+)
-* Docker installed (19+)
 
 
 ## Installation
@@ -63,40 +68,26 @@ Execute with IDE or maven
 
 ## Deploy
 
-Dockerize (Spring Boot + Docker)
+Spring Boot
 
-Important : Use **extends SpringBootServletInitializer**
+### Deploy Method 1
+
+1. Execute Application.java File
+
+
+### Deploy Method 2
 
 1. Execute the following command
 
 ```bash
-mvn clean install
-```
-
-2. Verify exist target/<artifact>
-
-3. Execute the following command
-
-Create a Docker image File
-
-```bash
-docker build -t acme/acme-greeting-api-restful-docker-tomcat .
-```
-
-4. Verify exist image created
-
-5. Execute the following command
-
-Create a Docker container
-
-```bash
-docker run -p 8888:8080 -t acme/acme-greeting-api-restful-docker-tomcat
+mvn package && java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
 ```
 
 
 ## Use
 
 Important : Beware of the configured port
+
 
 ### Use Browser
 
@@ -126,18 +117,12 @@ And return JSON
 
 ### Use "curl"
 
-User the "curl"
+Use the "curl"
 
 
 ## Use Actuators Endpoints
 
-Important : Beware of the configured port
-
-The actuators endpoints are configured in the application.yml
-* Port : 8091
-* Based-path : /manage
-
-Example : http://localhost:8091/manage/info
+N/A
 
 
 ## Versioning

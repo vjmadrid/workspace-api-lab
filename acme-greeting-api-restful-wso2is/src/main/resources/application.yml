@@ -1,9 +1,9 @@
 server:
-   port: 8080
+   port: 8091
    
 spring:
    profiles:
-      active: prod
+      active: dev
    main:
       banner-mode: off
   
@@ -37,4 +37,9 @@ info:
       version: @project.version@
       java: @java.version@
       encoding: @project.build.sourceEncoding@
-      tomcat: @tomcat.version@
+      
+#security:
+#  oauth2:
+#    client:
+#      client-id: acme
+#      client-secret: acmesecret

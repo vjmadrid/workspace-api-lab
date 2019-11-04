@@ -1,14 +1,14 @@
-package com.acme.greeting.api.restful.docker.tomcat;
+package com.acme.greeting.api.restful.wso2is;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer{
+//@EnableAuthorizationServer
+public class Application {
 
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
   }
-  
 }

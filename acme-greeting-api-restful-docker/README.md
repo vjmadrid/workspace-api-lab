@@ -6,7 +6,6 @@ Invoke : localhost:<port>/greeting
 
 And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
 
-This projects stands out for:
 
 ## Technological Stack
 

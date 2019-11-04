@@ -24,15 +24,17 @@
         </rollingPolicy>
     </appender>
  
-	<logger name="com.acme.greeting" level="DEBUG" additivity="false">
+	<logger name="com.acme.message" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE_INFO" />
     </logger>
     
     <logger name="org.springframework" level="INFO" />
     
+     <logger name="org.springframework.security" level="DEBUG" />
+    
 	<springProfile name="dev">
-		<root level="DEBUG">
+		<root level="info">
 			<appender-ref ref="STDOUT"/>
 		</root>
 	</springProfile>
