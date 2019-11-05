@@ -6,6 +6,15 @@ Invoke : localhost:<port>/greeting
 
 And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
 
+This projects stands out for:
+
+* Provides **Configuration classes** : Classes to configure the project (scanning package,...)
+* Provides **Constant classes** : Classes to configure the project
+* Provides **Basic classes** : Controller and Entity
+* Provides **Properties Configuration File** (application.yml)
+* Provides **Log Configuration File** (logback.yml)
+* Provides **Dockerfile**
+
 
 ## Technological Stack
 
@@ -13,6 +22,8 @@ And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
 * [Maven 3](https://maven.apache.org/) - Dependency Management
 * [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
 * [Spring](https://spring.io)
+* [Docker](https://www.docker.com/) - Container Technology
+
 
 Dependencies with architecture projects
 
@@ -51,12 +62,14 @@ mvn clean install
 
 The result will be the generation of an artifact in your Maven repository (local)
 
+Generate : JAR File
+
 
 ## Testing
 
 This project has tests : Unit + Integration
 
-Execute with IDE or maven
+Execute with IDE or Maven
 
 
 ## Deploy
@@ -68,6 +81,9 @@ Dockerize (Spring Boot + Docker)
 ```bash
 mvn clean install
 ```
+
+Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
+
 
 2. Verify exist target/<artifact>
 
@@ -88,6 +104,8 @@ Create a Docker container
 ```bash
 docker run -p 8091:8091 -t acme/acme-greeting-api-restful-docker
 ```
+
+* Execute CMD ["java", "-jar", "app/XXXX.jar"] to start application 
 
 
 ## Use

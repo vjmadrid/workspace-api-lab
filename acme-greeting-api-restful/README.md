@@ -58,12 +58,14 @@ mvn clean install
 
 The result will be the generation of an artifact in your Maven repository (local)
 
+Generate : JAR File
+
 
 ## Testing
 
 This project has tests : Unit + Integration
 
-Execute with IDE or maven
+Execute with IDE or Maven
 
 
 ## Deploy
@@ -81,6 +83,13 @@ Spring Boot
 
 ```bash
 mvn package && java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
+```
+Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
+
+To run the jar file use the following command 
+
+```bash
+java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
 ```
 
 

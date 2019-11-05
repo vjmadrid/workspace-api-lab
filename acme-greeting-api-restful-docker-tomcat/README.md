@@ -6,6 +6,13 @@ Invoke : localhost:<port>/greeting
 
 And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
 
+* Provides **Configuration classes** : Classes to configure the project (scanning package,...)
+* Provides **Constant classes** : Classes to configure the project
+* Provides **Basic classes** : Controller and Entity
+* Provides **Properties Configuration File** (application.yml)
+* Provides **Log Configuration File** (logback.yml)
+* Provides **Dockerfile**
+
 
 ## Technological Stack
 
@@ -13,7 +20,9 @@ And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
 * [Maven 3](https://maven.apache.org/) - Dependency Management
 * [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
 * [Spring](https://spring.io)
+* [Docker](https://www.docker.com/) - Container Technology
 * [Tomcat 8.5](http://tomcat.apache.org) : Servlet Container
+
 
 Dependencies with architecture projects
 
@@ -53,12 +62,14 @@ mvn clean install
 
 The result will be the generation of an artifact in your Maven repository (local)
 
+Generate : WAR File
+
 
 ## Testing
 
 This project has tests : Unit + Integration
 
-Execute with IDE or maven
+Execute with IDE or Maven
 
 
 ## Deploy
@@ -67,13 +78,20 @@ Dockerize (Spring Boot + Docker)
 
 Important : Use **extends SpringBootServletInitializer**
 
+```bash
+@SpringBootApplication
+public class Application extends SpringBootServletInitializer{
+...
+}
+```
+
 1. Execute the following command
 
 ```bash
 mvn clean install
 ```
 
-2. Verify exist target/<artifact>
+2. Verify exist target/<artifact> -> WAR
 
 3. Execute the following command
 
@@ -82,6 +100,9 @@ Create a Docker image File
 ```bash
 docker build -t acme/acme-greeting-api-restful-docker-tomcat .
 ```
+
+* Copy the generated WAR file to tomcat/webapps directory
+
 
 4. Verify exist image created
 
