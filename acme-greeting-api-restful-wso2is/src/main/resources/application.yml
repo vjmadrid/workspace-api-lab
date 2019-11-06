@@ -4,14 +4,9 @@ server:
 spring:
    profiles:
       active: dev
-   main:
-      banner-mode: off
+   banner:
+      location: classpath:custom-banner.txt
   
-#todo: make sure to always enable security in production
-security:
-   basic:
-      enabled: false
-
 #Management Endpoints 
 management:
    server:
@@ -38,8 +33,18 @@ info:
       java: @java.version@
       encoding: @project.build.sourceEncoding@
       
-#security:
-#  oauth2:
-#    client:
-#      client-id: acme
-#      client-secret: acmesecret
+security:
+   basic:
+      enabled: false
+   oauth2:
+      client:
+         client-id: 7a2DIMEBEY2CIsoJj66mil6VK5sa
+         client-secret: YiJDmCN3nYCXtfT2kEYtXEOR9g8a
+         client.access-token-uri: https://localhost:9443/oauth2/token
+         user-authorization-uri: https://localhost:9443/oauth2/token/authorize
+         scope: openid
+      resource:
+         filter-order: 3
+         user-info-uri: https://localhost:9443/oauth2/userinfo
+         token-info-uri: https://localhost:9443/oauth2/introspect
+         prefer-token-info: true

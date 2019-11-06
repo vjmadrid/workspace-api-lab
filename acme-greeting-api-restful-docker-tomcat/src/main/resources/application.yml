@@ -1,11 +1,12 @@
 server:
    port: 8080
+   contextPath: /acme
    
 spring:
    profiles:
       active: prod
-   main:
-      banner-mode: off
+   banner:
+      location: classpath:custom-banner.txt
   
 #todo: make sure to always enable security in production
 security:
@@ -15,7 +16,7 @@ security:
 #Management Endpoints 
 management:
    server:
-      port: 8091         # Actuator port
+      port: 8080         # Actuator port
    endpoint:             # Enabling Endpoints
       shutdown:
          enabled: true   # Configure "shutdown" enabled (By default all endpoints are enabled except shutdown) 

@@ -4,8 +4,8 @@ server:
 spring:
    profiles:
       active: dev
-   main:
-      banner-mode: off
+   banner:
+      location: classpath:custom-banner.txt
   
 #todo: make sure to always enable security in production
 security:

@@ -124,7 +124,7 @@ Important : Beware of the configured port
 The service will accept HTTP GET requests at :
 
 ```bash
-http://localhost:8091/greeting
+http://localhost:8091/acme/greeting
 ```
 
 And return JSON
@@ -136,7 +136,7 @@ And return JSON
 The service will accept HTTP GET requests at :
 
 ```bash
-http://localhost:8091/greeting?name=Acme
+http://localhost:8091/acme/greeting?name=Acme
 ```
 
 And return JSON
