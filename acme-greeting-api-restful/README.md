@@ -11,8 +11,9 @@ This projects stands out for:
 * Provides **Configuration classes** : Classes to configure the project (scanning package,...)
 * Provides **Constant classes** : Classes to configure the project
 * Provides **Basic classes** : Controller and Entity
-* Provides **Properties Configuration File** (application.yml)
+* Provides **Properties Configuration File** with **Environment** (application-{environment}.yml)
 * Provides **Log Configuration File** (logback.yml)
+* Provides **Spring/Maven Profile Integration**
 
 
 ## Technological Stack
@@ -82,7 +83,34 @@ Spring Boot
 1. Execute the following command
 
 ```bash
-mvn package && java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
+mvn package 
+```
+
+Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
+
+To run the jar file use the following command 
+
+```bash
+java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
+```
+
+Use default environment -> dev
+
+
+### Deploy Method 3 : Environment
+
+1. Execute the following command
+
+Use Spring profiles with Maven Profiles -> Special Integration
+
+* spring.profiles.active=@spring.profiles.active@
+* enable resource filtering
+
+
+In this case define : "dev", "uat" and "prod"
+
+```bash
+mvn package -Pprod
 ```
 Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
 
@@ -91,6 +119,10 @@ To run the jar file use the following command
 ```bash
 java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
 ```
+
+Use default environment
+
+
 
 
 ## Use

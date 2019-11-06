@@ -1,4 +1,4 @@
-#DEFAULT/DEV ENVIRONEMNT SETTING#
+#UAT ENVIRONEMNT SETTING#
 server:
    port: 8091
    
@@ -38,4 +38,4 @@ info:
       version: @project.version@
       java: @java.version@
       encoding: @project.build.sourceEncoding@
-      environtment: DEFAULT/DEV
+      environtment: UAT
