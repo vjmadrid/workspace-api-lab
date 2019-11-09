@@ -1,0 +1,41 @@
+#PROD ENVIRONEMNT SETTING#
+server:
+   port: 8091
+   
+spring:
+   profiles:
+      active: "@spring.profiles.active@"
+   banner:
+      location: classpath:custom-banner.txt
+  
+#todo: make sure to always enable security in production
+security:
+   basic:
+      enabled: false
+
+#Management Endpoints 
+management:
+   server:
+      port: 8091         # Actuator port
+   endpoint:             # Enabling Endpoints
+      shutdown:
+         enabled: true   # Configure "shutdown" enabled (By default all endpoints are enabled except shutdown) 
+      info:
+         enabled: true
+   endpoints:
+      web:
+         base-path: /manage
+         exposure:
+            include: health, info, beans, shutdown # Include endpints in web mode
+   security:
+      enabled: false # management port is internal only. no need to secure it
+  
+info:
+   app:
+      artifact: "@project.artifactId@"
+      name: "@project.name@"
+      description: "@project.description@"
+      version: "@project.version@"
+      java: "@java.version@"
+      encoding: "@project.build.sourceEncoding@"
+      environment: "PROD"
