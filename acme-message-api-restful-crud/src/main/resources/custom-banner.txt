@@ -8,6 +8,5 @@ ${AnsiBackground.BLACK}${AnsiColor.RED}
  - Application : ${info.app.artifact}
  - Version     : ${info.app.version}
  - Spring Boot : ${spring-boot.version}
- - Environment : ${info.app.environment}
 
 ${AnsiBackground.BLACK}${AnsiColor.WHITE}

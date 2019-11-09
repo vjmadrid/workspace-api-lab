@@ -33,9 +33,9 @@
 			</activation>
 		</profile>
 		<profile>
-			<id>int</id>
+			<id>uat</id>
 			<properties>
-				<spring.profiles.active>int</spring.profiles.active>
+				<spring.profiles.active>uat</spring.profiles.active>
 			</properties>
 		</profile>
 		<profile>
@@ -64,6 +64,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

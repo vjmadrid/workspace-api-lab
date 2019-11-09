@@ -1,12 +1,26 @@
+#DEFAULT/DEV ENVIRONEMNT SETTING#
 server:
    port: 8091
    
 spring:
    profiles:
-      active: dev
-   main:
-      banner-mode: off
-  
+      active: @spring.profiles.active@
+   banner:
+      location: classpath:custom-banner.txt
+
+datasource:
+   driver-class-name: org.h2.Driver
+   url: jdbc:h2:mem:acme-db;DB_CLOSE_DELAY=-1
+   username: sa
+   password:
+      
+jpa:
+   hibernate:
+      ddl-auto: create
+   database-platform: org.hibernate.dialect.MySQL57Dialect
+   generate-ddl: true
+   spring.jpa.show-sql: true
+
 #todo: make sure to always enable security in production
 security:
    basic:
@@ -37,3 +51,4 @@ info:
       version: @project.version@
       java: @java.version@
       encoding: @project.build.sourceEncoding@
+      environtment: DEFAULT/DEV

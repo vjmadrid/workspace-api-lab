@@ -4,7 +4,7 @@ server:
    
 spring:
    profiles:
-      active: @spring.profiles.active@
+      active: "@spring.profiles.active@"
    banner:
       location: classpath:custom-banner.txt
   
@@ -32,10 +32,10 @@ management:
   
 info:
    app:
-      artifact: @project.artifactId@
-      name: @project.name@
-      description: @project.description@
-      version: @project.version@
-      java: @java.version@
-      encoding: @project.build.sourceEncoding@
-      environtment: PROD
+      artifact: "@project.artifactId@"
+      name: "@project.name@"
+      description: "@project.description@"
+      version: "@project.version@"
+      java: "@java.version@"
+      encoding: "@project.build.sourceEncoding@"
+      environment: "PROD"

@@ -1,0 +1,7 @@
+#DEV TESTING ENVIRONEMNT SETTING#
+jpa:
+   hibernate:
+      ddl-auto: create-drop
+   database-platform: org.hibernate.dialect.MySQL57Dialect
+   generate-ddl: true
+   spring.jpa.show-sql: true

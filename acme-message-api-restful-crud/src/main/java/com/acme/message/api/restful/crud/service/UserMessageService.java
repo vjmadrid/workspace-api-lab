@@ -11,9 +11,9 @@ public interface UserMessageService {
 	
 	Optional<UserMessage> findByPK(Long id);
 	
-	void insert(UserMessage villain);
+	void insert(UserMessage userMessage);
 
-	void update(UserMessage villain);
+	void update(UserMessage userMessage);
 	
 	void delete(UserMessage id);
 	

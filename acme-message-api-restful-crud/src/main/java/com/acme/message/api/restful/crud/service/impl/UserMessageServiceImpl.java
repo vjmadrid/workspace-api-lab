@@ -26,12 +26,14 @@ public class UserMessageServiceImpl implements UserMessageService {
 	@Override
 	public List<UserMessage> findAll() {
 		LOG.trace("Find all UserMessage");
+		
 		return CollectionConverter.toList(userMessageRepository.findAll());
 	}
 
 	@Override
 	public Optional<UserMessage> findByPK(Long id) {
 		LOG.trace("Find UserMessage by id : {}", id);
+		
 		return userMessageRepository.findById(id);
 	}
 
@@ -39,6 +41,7 @@ public class UserMessageServiceImpl implements UserMessageService {
 	@Transactional
 	public void insert(UserMessage userMessage) {
 		LOG.trace("Insert UserMessage");
+		
 		userMessageRepository.save(userMessage);
 	}
 
@@ -46,14 +49,15 @@ public class UserMessageServiceImpl implements UserMessageService {
 	@Transactional
 	public void update(UserMessage userMessage) {
 		LOG.trace("Update UserMessage with id : {}", userMessage.getId());
-		userMessageRepository.save(userMessage);
 		
+		userMessageRepository.save(userMessage);	
 	}
 
 	@Override
 	@Transactional
 	public void delete(UserMessage userMessage) {
 		LOG.trace("Delete UserMessage by id : {}", userMessage.getId());
+		
 		userMessageRepository.delete(userMessage);
 	}
 

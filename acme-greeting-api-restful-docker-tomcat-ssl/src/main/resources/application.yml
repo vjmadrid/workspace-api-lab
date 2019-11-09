@@ -12,7 +12,7 @@ server:
    
 spring:
    profiles:
-      active: prod
+      active: dev
    banner:
       location: classpath:custom-banner.txt
   
@@ -40,10 +40,10 @@ management:
   
 info:
    app:
-      artifact: @project.artifactId@
-      name: @project.name@
-      description: @project.description@
-      version: @project.version@
-      java: @java.version@
-      encoding: @project.build.sourceEncoding@
-      tomcat: @tomcat.version@
+      artifact: "@project.artifactId@"
+      name: "@project.name@"
+      description: "@project.description@"
+      version: "@project.version@"
+      java: "@java.version@"
+      encoding: "@project.build.sourceEncoding@"
+      environment: "DEFAULT/DEV"

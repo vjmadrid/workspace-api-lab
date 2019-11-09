@@ -16,6 +16,7 @@ This projects stands out for:
 * Provides **Spring/Maven Profile Integration**
 
 
+
 ## Technological Stack
 
 * Java 8
@@ -35,12 +36,14 @@ Third Party Dependencies
 * **spring-boot-devtools** [2.2.0.RELEASE] : Spring Boot Dev tools Library
 
 
+
 ## Prerequisites
 
 Define what elements are needed to install the software
 
 * Java 8 installed (1.5+ version required)
 * Maven installed  (3+)
+
 
 
 ## Installation
@@ -62,11 +65,13 @@ The result will be the generation of an artifact in your Maven repository (local
 Generate : JAR File
 
 
+
 ## Testing
 
 This project has tests : Unit + Integration
 
 Execute with IDE or Maven
+
 
 
 ## Deploy
@@ -76,6 +81,14 @@ Spring Boot
 ### Deploy Method 1
 
 1. Execute Application.java File
+
+or 
+
+1. Execute the following command
+
+```bash
+mvn spring-boot:run
+```
 
 
 ### Deploy Method 2
@@ -161,15 +174,32 @@ And return JSON
 Use the "curl"
 
 
+
+
 ## Use Actuators Endpoints
 
-N/A
+Important : Beware of the configured port
+
+The actuators endpoints are configured in the application.yml
+* Port : 8091
+* Based-path : /manage
+
+Example : http://localhost:8091/manage/info
+
+The service will accept HTTP GET requests at :
+
+```bash
+http://localhost:8091/manage/<endpoint>
+```
+
 
 
 ## Versioning
 
 **Note :** [SemVer](http://semver.org/) is used for the versioning.
 To see the available versions access the repository tags
+
+
 
 ## Authors
 

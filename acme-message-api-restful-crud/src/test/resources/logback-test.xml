@@ -6,7 +6,7 @@
     </encoder>
   </appender>
 
-  <logger name="com.cistec.example.api.restful" level="DEBUG" />
+  <logger name="com.acme.message.api.restful" level="DEBUG" />
 
   <root level="INFO">
     <appender-ref ref="STDOUT" />

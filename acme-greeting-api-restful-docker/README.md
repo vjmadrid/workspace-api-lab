@@ -16,6 +16,7 @@ This projects stands out for:
 * Provides **Dockerfile**
 
 
+
 ## Technological Stack
 
 * Java 8
@@ -23,7 +24,6 @@ This projects stands out for:
 * [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
 * [Spring](https://spring.io)
 * [Docker](https://www.docker.com/) - Container Technology
-
 
 Dependencies with architecture projects
 
@@ -37,6 +37,7 @@ Third Party Dependencies
 * **spring-boot-devtools** [2.2.0.RELEASE] : Spring Boot Dev tools Library
 
 
+
 ## Prerequisites
 
 Define what elements are needed to install the software
@@ -44,6 +45,7 @@ Define what elements are needed to install the software
 * Java 8 installed (1.5+ version required)
 * Maven installed  (3+)
 * Docker installed (19+)
+
 
 
 ## Installation
@@ -65,11 +67,13 @@ The result will be the generation of an artifact in your Maven repository (local
 Generate : JAR File
 
 
+
 ## Testing
 
 This project has tests : Unit + Integration
 
 Execute with IDE or Maven
+
 
 
 ## Deploy
@@ -112,6 +116,7 @@ docker run -p 8091:8091 -t acme/acme-greeting-api-restful-docker
 
 Important : Beware of the configured port
 
+
 ### Use Browser
 
 The service will accept HTTP GET requests at :
@@ -140,7 +145,9 @@ And return JSON
 
 ### Use "curl"
 
-User the "curl"
+Use the "curl"
+
+
 
 
 ## Use Actuators Endpoints
@@ -153,11 +160,20 @@ The actuators endpoints are configured in the application.yml
 
 Example : http://localhost:8091/manage/info
 
+The service will accept HTTP GET requests at :
+
+```bash
+http://localhost:8091/manage/<endpoint>
+```
+
+
 
 ## Versioning
 
 **Note :** [SemVer](http://semver.org/) is used for the versioning.
 To see the available versions access the repository tags
+
+
 
 ## Authors
 

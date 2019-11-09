@@ -1,3 +1,4 @@
+#DEFAULT/DEV ENVIRONEMNT SETTING#
 server:
    port: 8091
    contextPath: /acme
@@ -32,9 +33,10 @@ management:
   
 info:
    app:
-      artifact: @project.artifactId@
-      name: @project.name@
-      description: @project.description@
-      version: @project.version@
-      java: @java.version@
-      encoding: @project.build.sourceEncoding@
+      artifact: "@project.artifactId@"
+      name: "@project.name@"
+      description: "@project.description@"
+      version: "@project.version@"
+      java: "@java.version@"
+      encoding: "@project.build.sourceEncoding@"
+      environment: "DEFAULT/DEV"

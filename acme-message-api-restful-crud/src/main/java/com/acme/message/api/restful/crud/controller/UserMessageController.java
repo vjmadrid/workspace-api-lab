@@ -60,6 +60,7 @@ public class UserMessageController {
 	@RequestMapping(value = UserMessageRestApiConstant.MAPPING_PK, method = RequestMethod.GET)
 	public ResponseEntity<?> findByPk(@PathVariable("id") long id, HttpServletRequest request) {
 		LOG.info("Fetching UserMessage with id {}", id);
+		
 		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(id);
 		
 		UserMessage value = userMessageFound.get();
@@ -77,6 +78,7 @@ public class UserMessageController {
 	public ResponseEntity<?> insert(@RequestBody UserMessage userMessage, UriComponentsBuilder ucBuilder,
 			HttpServletRequest request) {
 		LOG.info("Creating UserMessage : {}", userMessage);
+		
 		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(userMessage.getId());
 		
 		UserMessage value = userMessageFound.get();
