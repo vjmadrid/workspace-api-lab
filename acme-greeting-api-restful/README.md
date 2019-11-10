@@ -14,6 +14,7 @@ This projects stands out for:
 * Provides **Properties Configuration File** with **Environment** (application-{environment}.yml)
 * Provides **Log Configuration File** (logback.yml)
 * Provides **Spring/Maven Profile Integration**
+* Provides **Swagger** for document the Restful API
 
 
 
@@ -133,7 +134,7 @@ To run the jar file use the following command
 java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
 ```
 
-Use default environment
+Use package environment
 
 
 
@@ -192,6 +193,25 @@ The service will accept HTTP GET requests at :
 http://localhost:8091/manage/<endpoint>
 ```
 
+
+## Swagger
+
+
+The service will accept HTTP GET requests at :
+
+```bash
+http://localhost:8091/v2/api-docs
+```
+
+And return JSON with meta inforamtion of the API
+
+
+Launching swagger UI swagger-ui.html
+
+
+```bash
+http://localhost:8081/swagger-ui.html
+```
 
 
 ## Versioning

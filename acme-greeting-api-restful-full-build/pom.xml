@@ -98,7 +98,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
-		</dependency>
+		</dependency>		
 
 	</dependencies>
 
@@ -305,6 +305,11 @@
                 </executions>
             </plugin>
 			
+			
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
 			
 			<!-- maven-site-plugin : Plugin used to generate the site for the project 
 
