@@ -4,22 +4,12 @@ server:
    
 spring:
    profiles:
-      active: @spring.profiles.active@
+      active: "@spring.profiles.active@"
    banner:
       location: classpath:custom-banner.txt
-
-datasource:
-   driver-class-name: org.h2.Driver
-   url: jdbc:h2:mem:acme-db;DB_CLOSE_DELAY=-1
-   username: sa
-   password:
-      
-jpa:
-   hibernate:
-      ddl-auto: create
-   database-platform: org.hibernate.dialect.MySQL57Dialect
-   generate-ddl: true
-   spring.jpa.show-sql: true
+   h2:
+      console:
+         enabled : true
 
 #todo: make sure to always enable security in production
 security:
@@ -45,10 +35,10 @@ management:
   
 info:
    app:
-      artifact: @project.artifactId@
-      name: @project.name@
-      description: @project.description@
-      version: @project.version@
-      java: @java.version@
-      encoding: @project.build.sourceEncoding@
-      environtment: DEFAULT/DEV
+      artifact: "@project.artifactId@"
+      name: "@project.name@"
+      description: "@project.description@"
+      version: "@project.version@"
+      java: "@java.version@"
+      encoding: "@project.build.sourceEncoding@"
+      environtment: "DEFAULT/DEV"
