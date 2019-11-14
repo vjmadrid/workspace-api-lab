@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -15,7 +16,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.0.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -28,7 +29,7 @@
 		<maven.version>3.0</maven.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Verifier -->
 		<verifier.verification.file>src/test/verifier/verifications-test.xml</verifier.verification.file>
@@ -37,7 +38,7 @@
 		<skip.integration.tests>true</skip.integration.tests>
 
 	</properties>
-	
+
 	<profiles>
 		<profile>
 			<id>dev</id>
@@ -87,18 +88,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 
 		<!-- To reload the code when changes made -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
-		</dependency>		
+		</dependency>
 
 	</dependencies>
 
@@ -122,26 +123,26 @@
 					<execution>
 						<id>pre-integration-test</id>
 						<goals>
-						  <goal>start</goal>
+							<goal>start</goal>
 						</goals>
 						<configuration>
-						  <skip>${skip.integration.tests}</skip>
+							<skip>${skip.integration.tests}</skip>
 						</configuration>
 					</execution>
 					<execution>
 						<id>post-integration-test</id>
 						<goals>
-						  <goal>stop</goal>
+							<goal>stop</goal>
 						</goals>
 						<configuration>
-						  <skip>${skip.integration.tests}</skip>
+							<skip>${skip.integration.tests}</skip>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
 
-			<!-- maven-resources-plugin : Plugin used to handle the project resources  -->
+			<!-- maven-resources-plugin : Plugin used to handle the project resources -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -161,16 +162,17 @@
 				</configuration>
 			</plugin>
 
-			<!-- maven-verifier-plugin : Plugin used to verify the existence of files and directories  -->
+			<!-- maven-verifier-plugin : Plugin used to verify the existence of files 
+				and directories -->
 
 			<plugin>
-                <artifactId>maven-verifier-plugin</artifactId>
-                <version>1.1</version>
-                <configuration>
-                    <verificationFile>${verifier.verification.file}</verificationFile>
-                    <failOnError>true</failOnError>
-                </configuration>
-                <executions>
+				<artifactId>maven-verifier-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<verificationFile>${verifier.verification.file}</verificationFile>
+					<failOnError>true</failOnError>
+				</configuration>
+				<executions>
 					<execution>
 						<id>main</id>
 						<phase>verify</phase>
@@ -179,147 +181,103 @@
 						</goals>
 					</execution>
 				</executions>
-            </plugin>
-
-			<!-- maven-surefire-plugin : Plugin used to run unit tests
-				 	- Generate reports in the directory target/surefire-reports
-			-->
-
-			<plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                	<skipTests>${skip.unit.tests}</skipTests>
-                    <excludes>
-                        <exclude>**/*IntegrationTest</exclude>
-                        <exclude>**/*IT</exclude>
-                    </excludes>
-					<excludedGroups>com.acme.greeting.api.restful.full.build.integration</excludedGroups>
-                    <testFailureIgnore>true</testFailureIgnore>
-                </configuration>
-            </plugin>
-
-			<!-- maven-failsafe-plugin : Plugin used to run integration tests-->
-
-			<plugin>
-		        <artifactId>maven-failsafe-plugin</artifactId>
-		        <configuration>
-                    <skipITs>${skip.integration.tests}</skipITs>
-                    <includes>
-			            <include>**/*RestIT</include>
-			            <include>**/*RestITCase</include>
-			            <include>**/*RestClient</include>
-			        </includes>
-                </configuration>
-		        <executions>
-		            <execution>
-		                <goals>
-		                    <goal>integration-test</goal>
-		                    <goal>verify</goal>
-		                </goals>
-		            </execution>
-		        </executions>
 			</plugin>
-			
-			<!-- build-helper-maven-plugin : Plugin used to help with Maven build lifecycle-->
-			 <!-- 
-			<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                    	<id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/main/another-src</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                    
-                   
-                    <execution>
-                        <id>add-integration-test-source</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>add-test-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/integration-test/java</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>add-integration-test-resource</id>
-                        <phase>generate-test-resources</phase>
-                        <goals>
-                            <goal>add-test-resource</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>src/integration-test/resources</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                    
-                   
-                </executions>
-            </plugin>
-              -->
-            
-            <!-- maven-enforcer-plugin : Plugin used to help with the environmental constrains : JDV, Maven Version, Environment var, rules, ...-->
-            
-             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <banDuplicatePomDependencyVersions/>
-                                <requireMavenVersion>
-                                    <version>${maven.version}</version>
-                                    <message>Invalid Maven version. It should, at least, be 3.0</message>
-                                </requireMavenVersion>
-                                <requireJavaVersion>
-                                    <version>${java.version}</version>
-                                    <message>Invalid Java version. It should, at least, be 1.8 OpenJDK</message>
-                                </requireJavaVersion>
-                                <requireActiveProfile>
-                                    <profiles>${spring.profiles.active}</profiles>
-                                    <message>Missing active profiles</message>
-                                    <level>ERROR</level>
-                                </requireActiveProfile>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-			
-			
-			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-            </plugin>
-			
-			<!-- maven-site-plugin : Plugin used to generate the site for the project 
+
+			<!-- maven-surefire-plugin : Plugin used to run unit tests - Generate 
+				reports in the directory target/surefire-reports -->
 
 			<plugin>
-            	<groupId>org.apache.maven.plugins</groupId>
-            	<artifactId>maven-site-plugin</artifactId>
-            	<version>3.8.2</version>
-            </plugin>
-            
-            -->
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>${skip.unit.tests}</skipTests>
+					<excludes>
+						<exclude>**/*IntegrationTest</exclude>
+						<exclude>**/*IT</exclude>
+					</excludes>
+					<excludedGroups>com.acme.greeting.api.restful.full.build.integration</excludedGroups>
+					<testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+			</plugin>
+
+			<!-- maven-failsafe-plugin : Plugin used to run integration tests -->
+
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<skipITs>${skip.integration.tests}</skipITs>
+					<includes>
+						<include>**/*RestIT</include>
+						<include>**/*RestITCase</include>
+						<include>**/*RestClient</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- build-helper-maven-plugin : Plugin used to help with Maven build 
+				lifecycle -->
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>build-helper-maven-plugin</artifactId> 
+				<executions> <execution> <id>add-source</id> <phase>generate-sources</phase> 
+				<goals> <goal>add-source</goal> </goals> <configuration> <sources> <source>src/main/another-src</source> 
+				</sources> </configuration> </execution> <execution> <id>add-integration-test-source</id> 
+				<phase>generate-test-sources</phase> <goals> <goal>add-test-source</goal> 
+				</goals> <configuration> <sources> <source>src/integration-test/java</source> 
+				</sources> </configuration> </execution> <execution> <id>add-integration-test-resource</id> 
+				<phase>generate-test-resources</phase> <goals> <goal>add-test-resource</goal> 
+				</goals> <configuration> <resources> <resource> <directory>src/integration-test/resources</directory> 
+				</resource> </resources> </configuration> </execution> </executions> </plugin> -->
+
+			<!-- maven-enforcer-plugin : Plugin used to help with the environmental 
+				constrains : JDV, Maven Version, Environment var, rules, ... -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<banDuplicatePomDependencyVersions />
+								<requireMavenVersion>
+									<version>${maven.version}</version>
+									<message>Invalid Maven version. It should, at least, be 3.0</message>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<version>${java.version}</version>
+									<message>Invalid Java version. It should, at least, be 1.8
+										OpenJDK</message>
+								</requireJavaVersion>
+								<requireActiveProfile>
+									<profiles>${spring.profiles.active}</profiles>
+									<message>Missing active profiles</message>
+									<level>ERROR</level>
+								</requireActiveProfile>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+			</plugin>
+
+			<!-- maven-site-plugin : Plugin used to generate the site for the project 
+				<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId> 
+				<version>3.8.2</version> </plugin> -->
 
 		</plugins>
 	</build>
