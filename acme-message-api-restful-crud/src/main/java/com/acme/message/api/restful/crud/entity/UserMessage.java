@@ -1,6 +1,5 @@
 package com.acme.message.api.restful.crud.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,11 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "usermessage")
-public class UserMessage implements Serializable {
+public class UserMessage extends AbstractEntity {
 
-	private static final long serialVersionUID = -6242095987088758384L;
+
+	private static final long serialVersionUID = -5296552955771109028L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,14 +78,34 @@ public class UserMessage implements Serializable {
 	}
 	
 	@Override
-    public String toString() {
-        return "UserMessage{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", vip='" + vip + '\'' +
-                ", creationDate=" + creationDate +
-                ", deletedDate='" + deletedDate + '\'' +
-                '}';
-    }
+	public boolean equals(Object object) {
+		
+		if (this == object) {
+			return true;
+		}
+
+		if (!(object instanceof UserMessage)) {
+			return false;
+		}
+		
+		final UserMessage other = (UserMessage)object;
+
+		return new EqualsBuilder().append(getId(), other.getId())
+				.append(getDescription(), other.getDescription())
+				.append(isVip(), other.isVip())
+				.append(getCreationDate(), other.getCreationDate())
+				.append(getDeletedDate(), other.getDeletedDate())
+				.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(getId()).append(getDescription()).append(isVip()).append(getCreationDate()).append(getDeletedDate()).toHashCode();
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).toString();
+	}
 	
 }

@@ -1,4 +1,4 @@
-package com.acme.message.api.restful.crud.config.constant;
+package com.acme.message.api.restful.crud.constant;
 
 import java.lang.reflect.InvocationTargetException;
 

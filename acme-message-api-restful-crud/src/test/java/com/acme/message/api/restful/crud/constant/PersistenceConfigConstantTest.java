@@ -1,4 +1,4 @@
-package com.acme.message.api.restful.crud.config.constant;
+package com.acme.message.api.restful.crud.constant;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -11,7 +11,7 @@ public class PersistenceConfigConstantTest {
 	@Test
 	public void whenCheckWellFormattedClass() throws NoSuchMethodException, InvocationTargetException,
 			InstantiationException, IllegalAccessException {
-		JUnitTestBuilderUtil.assertUtilityClassWellDefined(PersistenceConfigConstantTest.class);
+		JUnitTestBuilderUtil.assertUtilityClassWellDefined(PersistenceConfigConstant.class);
 	}
 
 }
