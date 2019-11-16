@@ -1,4 +1,4 @@
-# Configuration Maven QA  Plugins
+# Configuration Maven Testing Plugins
 
 List of plugins to facilitate the operations to deploy with Maven
 

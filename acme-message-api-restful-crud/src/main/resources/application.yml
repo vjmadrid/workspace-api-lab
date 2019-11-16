@@ -10,6 +10,26 @@ spring:
    h2:
       console:
          enabled : true
+   liquibase:
+      change-log: classpath:db/changelog/db.changelog-master.yaml
+   jpa:
+      hibernate:
+         ddl-auto: none
+         show-sql: true
+         hbm2ddl:
+            auto: update
+         naming:
+            physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      properties:
+         hibernate:
+            format_sql: true
+            generate_statistics: true
+   datasource:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+      username: sa
+      password: sa
+
 
 #todo: make sure to always enable security in production
 security:
@@ -32,7 +52,7 @@ management:
             include: health, info, beans, shutdown # Include endpints in web mode
    security:
       enabled: false # management port is internal only. no need to secure it
-  
+
 info:
    app:
       artifact: "@project.artifactId@"

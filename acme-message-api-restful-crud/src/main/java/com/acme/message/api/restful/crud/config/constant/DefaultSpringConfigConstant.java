@@ -1,4 +1,4 @@
-package com.acme.message.api.restful.crud.constant;
+package com.acme.message.api.restful.crud.config.constant;
 
 public final class DefaultSpringConfigConstant {
 

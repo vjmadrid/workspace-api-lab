@@ -30,7 +30,6 @@ public class UserMessage extends AbstractEntity {
 	@Column(name = "vip")
 	private boolean vip;
 
-	
 	@Column(name = "creationdate")
 	private Date creationDate;
 	

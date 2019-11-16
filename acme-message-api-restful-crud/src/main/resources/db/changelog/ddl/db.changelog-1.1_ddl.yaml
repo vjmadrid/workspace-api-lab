@@ -1,0 +1,12 @@
+databaseChangeLog:
+- changeSet:
+   id: 1
+   author: admin
+   changes:
+   - addColumn:
+      tableName: usermessage
+      columns:
+      - column:
+         name: deleteddate
+         type: TIMESTAMP
+        

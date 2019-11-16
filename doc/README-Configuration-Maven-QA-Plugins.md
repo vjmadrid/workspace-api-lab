@@ -22,9 +22,9 @@ Note : Add to the plugins area <plugins> or in a specific way to the established
 
 ### <a name="jacoco-maven-plugin">jacoco-maven-plugin</a>
 
-Plugin used to work with Spring Boot application
+Plugin used to xxxx
 
-https://github.com/sidohaakma/semver-maven-plugin
+XXX
 
 ```bash
 <plugins>

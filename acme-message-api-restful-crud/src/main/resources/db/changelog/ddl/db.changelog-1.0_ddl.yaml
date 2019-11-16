@@ -1,0 +1,32 @@
+databaseChangeLog:
+- changeSet:
+   id: 1
+   author: admin
+   changes:
+   - createTable:
+      tableName: usermessage
+      columns:
+      - column:
+         name: id
+         type: BIGINT
+         autoIncrement: true
+         constraints:
+            primaryKey: true
+            primaryKeyName: usermessage_pkey
+      - column:
+         name: description
+         type: VARCHAR(50)
+      - column:
+         name: vip
+         type: BOOLEAN
+- changeSet:
+   id: 2
+   author: admin
+   changes:
+   - addColumn:
+      tableName: usermessage
+      columns:
+      - column:
+         name: creationdate
+         type: TIMESTAMP
+        
