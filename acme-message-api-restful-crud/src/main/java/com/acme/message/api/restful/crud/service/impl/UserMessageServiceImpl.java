@@ -39,18 +39,18 @@ public class UserMessageServiceImpl implements UserMessageService {
 
 	@Override
 	@Transactional
-	public void insert(UserMessage userMessage) {
+	public UserMessage insert(UserMessage userMessage) {
 		LOG.trace("Insert UserMessage");
 		
-		userMessageRepository.save(userMessage);
+		return userMessageRepository.save(userMessage);
 	}
 
 	@Override
 	@Transactional
-	public void update(UserMessage userMessage) {
+	public UserMessage update(UserMessage userMessage) {
 		LOG.trace("Update UserMessage with id : {}", userMessage.getId());
 		
-		userMessageRepository.save(userMessage);	
+		return userMessageRepository.save(userMessage);	
 	}
 
 	@Override

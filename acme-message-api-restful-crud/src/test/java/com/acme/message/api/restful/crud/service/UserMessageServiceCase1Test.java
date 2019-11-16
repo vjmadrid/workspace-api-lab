@@ -64,7 +64,7 @@ public class UserMessageServiceCase1Test {
 	@Test
 	public void whenCallDelete_ThenInvokeTheDaoMethod() {
 		userMessageService.delete(userMessageTest);
-		verify(userMessageRepository).delete(userMessageTest);;
+		verify(userMessageRepository).delete(userMessageTest);
 	}
 
 }
