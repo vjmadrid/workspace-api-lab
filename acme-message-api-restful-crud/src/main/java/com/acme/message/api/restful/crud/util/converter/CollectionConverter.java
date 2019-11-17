@@ -1,6 +1,5 @@
 package com.acme.message.api.restful.crud.util.converter;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;

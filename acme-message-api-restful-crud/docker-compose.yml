@@ -1,0 +1,36 @@
+version: '2.3'
+services:
+   acme-mysql:
+      container_name: acme-mysql
+      image: mysql/mysql-server:5.7
+      environment:
+         MYSQL_DATABASE: test
+         MYSQL_ROOT_PASSWORD: acme-root
+         MYSQL_USER: acme
+         MYSQL_PASSWORD: acme
+         MYSQL_ROOT_HOST: '%'
+      ports:
+         - "3306:3306"
+      volumes:
+         - ./mysql/scripts:/docker-entrypoint-initdb.d
+      restart: always
+      networks:
+         - acme-network-net
+
+   app:
+      build: .
+      volumes:
+         - .:/app
+         - ~/.m2:/root/.m2
+      working_dir: /app
+      ports:
+         - "8080:8091"
+      command: mvn clean spring-boot:run -Pdev
+      depends_on:
+         - acme-mysql
+      networks:
+         - acme-network-net
+       
+networks:
+   acme-network-net:
+      name: acme-network-net

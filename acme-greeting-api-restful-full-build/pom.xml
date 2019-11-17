@@ -34,6 +34,7 @@
 		<!-- Verifier -->
 		<verifier.verification.file>src/test/verifier/verifications-test.xml</verifier.verification.file>
 
+		<!-- Testing -->	
 		<skip.unit.tests>false</skip.unit.tests>
 		<skip.integration.tests>true</skip.integration.tests>
 

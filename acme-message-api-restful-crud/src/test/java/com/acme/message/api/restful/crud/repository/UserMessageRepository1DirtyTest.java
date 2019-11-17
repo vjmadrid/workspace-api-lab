@@ -78,8 +78,6 @@ public class UserMessageRepository1DirtyTest {
 		
 	@Test
 	public void whenCallSave_thenSaveElement() {
-		final Long newID = Long.valueOf((UserMessageConstant.TEST_NUM_MESSAGES+1));
-		
 		userMessageTest.setId(null);
 		userMessageTest.setDescription("TEST");
 		
