@@ -55,7 +55,8 @@ public class UserMessageTest {
 		
 	@Test
 	public void shouldHaveADescriptiveToStringMethod() {
-		assertNotSame(-1, userMessage.toString().indexOf(UserMessage.class.getSimpleName()));
+		System.out.println("*** "+userMessage.toString());
+		assertTrue(userMessage.toString().contains("{\"id\""));
 	}
 
 	@Test

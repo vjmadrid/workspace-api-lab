@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 @Entity
 @Table(name = "usermessage")
@@ -104,7 +105,13 @@ public class UserMessage extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).toString();
+		return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+	            .append("id", id)
+	            .append("description", description)
+	            .append("vip", vip)
+	            .append("creationDate", creationDate)
+	            .append("deletedDate", deletedDate)
+	            .toString();
 	}
 	
 }

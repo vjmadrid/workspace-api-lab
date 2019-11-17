@@ -12,7 +12,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,7 +30,7 @@ import com.acme.message.api.restful.crud.entity.UserMessage;
 import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFactory;
 import com.acme.message.api.restful.crud.service.UserMessageService;
 
-public class UserMessageRestApiControllerTest {
+public class UserMessageControllerTest {
 	
 	private final String MESSAGE_SOURCE_VALUE = "Error Message TEST";
 	
@@ -60,7 +62,7 @@ public class UserMessageRestApiControllerTest {
 		
 		userMessageController.setUserMessageService(userMessageService);
 		
-		when(userMessageService.findByPK(anyLong()).get()).thenReturn(userMessageTest);
+		when(userMessageService.findByPK(anyLong())).thenReturn(Optional.of(userMessageTest));
 		when(userMessageService.findAll()).thenReturn(userMessageListTest);
 		
 		when(messageSource.getMessage(anyString(), any(Object[].class), anyObject())).thenReturn(MESSAGE_SOURCE_VALUE);
@@ -69,7 +71,7 @@ public class UserMessageRestApiControllerTest {
 	}
 
 	@Test
-	public final void shouldFindAllNullList() {
+	public final void whenCallFindAllAndServiceIsNull_thenReturnHttpNotFoundAndEmptyBody() {
 		when(userMessageService.findAll()).thenReturn(null);
 		
 		final ResponseEntity<List<UserMessage>> responseEntity = userMessageController.findAll();
@@ -79,8 +81,10 @@ public class UserMessageRestApiControllerTest {
 	}
 	
 	@Test
-	public final void shouldFindAllEmptyList() {
-		when(userMessageService.findAll()).thenReturn(new ArrayList<UserMessage>());
+	public final void whenCallFindAllAndServiceIsEmpty_thenReturnHttpNotFoundAndEmptyBody() {
+		when(userMessageService.findAll()).thenReturn(Collections.emptyList());
+		// Option 1 : Use new ArrayList<UserMessage>()
+		// Option 2 : Collections.emptyList()
 		
 		final ResponseEntity<List<UserMessage>> responseEntity = userMessageController.findAll();
 		
@@ -89,7 +93,7 @@ public class UserMessageRestApiControllerTest {
 	}
 	
 	@Test
-	public final void shouldFindAll() {
+	public final void whenCallFindAllAndServiceIsNormal_thenReturnHttpOkAndElementListBody() {
 		final ResponseEntity<List<UserMessage>> responseEntity = userMessageController.findAll();
 		
 		assertEquals(HttpStatus.OK,responseEntity.getStatusCode());
@@ -97,8 +101,20 @@ public class UserMessageRestApiControllerTest {
 	}
 	
 	@Test
-	public final void shouldFindByPKNullValue() {
-		when(userMessageService.findByPK(anyLong())).thenReturn(null);
+	public final void whenCallFindByPKAndServiceIsNull_thenReturnHttpNotFoundAndEmptyBody() {
+		userMessageTest = null;
+		when(userMessageService.findByPK(anyLong())).thenReturn(Optional.ofNullable(userMessageTest));
+		
+		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.findByPk(UserMessageConstant.TEST_USER_MESSAGE_1_ID,request);
+		
+		assertEquals(HttpStatus.NOT_FOUND,responseEntity.getStatusCode());
+		assertNull(responseEntity.getBody());
+	}
+	
+	@Test
+	public final void whenCallFindByPKAndServiceIsInvalid_thenReturnHttpNotFoundAndBodyWithMessage() {
+		userMessageTest.setId(null);
+		when(userMessageService.findByPK(anyLong())).thenReturn(Optional.of(userMessageTest));
 		
 		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.findByPk(UserMessageConstant.TEST_USER_MESSAGE_1_ID,request);
 		
@@ -107,7 +123,7 @@ public class UserMessageRestApiControllerTest {
 	}
 	
 	@Test
-	public final void shouldFindByPK() {	
+	public final void whenCallFindByPKAndServiceIsNormal_thenReturnHttpOkAndElementBody() {	
 		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.findByPk(UserMessageConstant.TEST_USER_MESSAGE_1_ID,request);
 		
 		assertEquals(HttpStatus.OK,responseEntity.getStatusCode());
@@ -115,7 +131,8 @@ public class UserMessageRestApiControllerTest {
 	}
 	
 	@Test
-	public final void shouldInsertExist() {
+	public final void whenCallInsertAndServiceIsExist_thenReturnHttpConflictAndEmptyBody() {
+		System.out.println("****** whenCallInsertAndServiceIsExist_thenReturnHttpConflictAndEmptyBody");
 		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.insert(userMessageTest,uriComponentsBuilder,request);
 		
 		assertEquals(HttpStatus.CONFLICT,responseEntity.getStatusCode());
@@ -123,10 +140,10 @@ public class UserMessageRestApiControllerTest {
 	}
 	
 	@Test
-	public final void shouldInsert() {
-		when(userMessageService.findByPK(anyLong())).thenReturn(null);
-		userMessageTest.setId(5L);
-		
+	public final void whenCallInsertAndServiceIsValid_thenReturnHttpCreatedAndHeaders() {
+		UserMessage userMessageLocalTest = null;
+		when(userMessageService.findByPK(anyLong())).thenReturn(Optional.ofNullable(userMessageLocalTest));
+
 		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.insert(userMessageTest,uriComponentsBuilder,request);
 		
 		assertEquals(HttpStatus.CREATED,responseEntity.getStatusCode());
@@ -134,8 +151,9 @@ public class UserMessageRestApiControllerTest {
 	}
 	
 	@Test
-	public final void shouldUpdateNotExist() {
-		when(userMessageService.findByPK(anyLong())).thenReturn(null);
+	public final void whenCallUpdateAndServiceNotExist_thenReturnHttpNotFoundAndElementBody() {
+		UserMessage userMessageLocalTest = null;
+		when(userMessageService.findByPK(anyLong())).thenReturn(Optional.ofNullable(userMessageLocalTest));
 		
 		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.update(UserMessageConstant.TEST_USER_MESSAGE_1_ID.longValue(), userMessageTest,request);
 				
@@ -144,7 +162,7 @@ public class UserMessageRestApiControllerTest {
 	}
 	
 	@Test
-	public final void shouldUpdate() {
+	public final void whenCallUpdateAndServiceValid_thenReturnHttpOKFoundAndEmptyBody() {
 		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.update(UserMessageConstant.TEST_USER_MESSAGE_1_ID.longValue(), userMessageTest,request);
 				
 		assertEquals(HttpStatus.OK,responseEntity.getStatusCode());
@@ -152,8 +170,9 @@ public class UserMessageRestApiControllerTest {
 	}
 	
 	@Test
-	public final void shouldDeleteNotExist() {
-		when(userMessageService.findByPK(anyLong())).thenReturn(null);
+	public final void whenCallDeleteAndServiceNotExist_thenReturnHttpNotFoundAndElementBody() {
+		UserMessage userMessageLocalTest = null;
+		when(userMessageService.findByPK(anyLong())).thenReturn(Optional.ofNullable(userMessageLocalTest));
 		
 		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.delete(UserMessageConstant.TEST_USER_MESSAGE_1_ID.longValue(), request);
 				
@@ -161,8 +180,9 @@ public class UserMessageRestApiControllerTest {
 		assertNotNull(responseEntity.getBody());
 	}
 	
+	
 	@Test
-	public final void shouldDelete() {
+	public final void whenCallDeleteAndServiceValid_thenReturnHttpOKFoundAndEmptyBody() {
 		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.delete(UserMessageConstant.TEST_USER_MESSAGE_1_ID.longValue(), request);
 				
 		assertEquals(HttpStatus.OK,responseEntity.getStatusCode());

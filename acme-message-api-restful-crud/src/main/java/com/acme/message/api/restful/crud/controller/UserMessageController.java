@@ -47,7 +47,9 @@ public class UserMessageController {
 			
 		if (userMessageList == null || userMessageList.isEmpty()) {
 			return new ResponseEntity<List<UserMessage>>(HttpStatus.NOT_FOUND);
-			// return HttpStatus.NO_CONTENT
+			// Option 1 : return new ResponseEntity<List<UserMessage>>(HttpStatus.NOT_FOUND);
+			// Option 2 : return HttpStatus.NO_CONTENT -> return new ResponseEntity<List<UserMessage>>(HttpStatus.NO_CONTENT)
+			// Option 3 : return ResponseEntity.notFound().build();
 		}
 
 		return new ResponseEntity<List<UserMessage>>(userMessageList, HttpStatus.OK);
@@ -62,6 +64,9 @@ public class UserMessageController {
 		LOG.info("Fetching UserMessage with id {}", id);
 		
 		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(id);
+		
+		if (userMessageFound == null || !userMessageFound.isPresent())
+			return ResponseEntity.notFound().build();
 		
 		UserMessage value = userMessageFound.get();
 
@@ -81,8 +86,8 @@ public class UserMessageController {
 		
 		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(userMessage.getId());
 		
-		UserMessage value = userMessageFound.get();
-
+		UserMessage value = (userMessageFound == null || !userMessageFound.isPresent())? null:userMessageFound.get();
+		
 		if (UserMessageValidator.INSTANCE.isValid(value)) {
 			final String errorMessage = generateErrorMessage(UserMessageRestApiConstant.MESSAGE_EXIST,
 					new Object[] { userMessage.getId() }, request);
@@ -103,7 +108,7 @@ public class UserMessageController {
 		LOG.info("Updating User with id {}", id);
 		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(userMessage.getId());
 		
-		UserMessage value = userMessageFound.get();
+		UserMessage value = (userMessageFound == null || !userMessageFound.isPresent())? null:userMessageFound.get();
 
 		if (!UserMessageValidator.INSTANCE.isValid(value)) {
 			final String errorMessage = generateErrorMessage(UserMessageRestApiConstant.MESSAGE_NOT_FOUND,
@@ -125,7 +130,7 @@ public class UserMessageController {
 		
 		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(id);
 		
-		UserMessage value = userMessageFound.get();
+		UserMessage value = (userMessageFound == null || !userMessageFound.isPresent())? null:userMessageFound.get();
 		
 		if (!UserMessageValidator.INSTANCE.isValid(value)) {
 			final String errorMessage = generateErrorMessage(UserMessageRestApiConstant.MESSAGE_NOT_FOUND,

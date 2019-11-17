@@ -37,7 +37,7 @@ import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFacto
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserMessageRepository1DirtyTest {
 	
-	public int TEST_NUM_MESSAGES = UserMessageConstant.TEST_NUM_MESSAGES;
+	public int TEST_NUM_MESSAGES = 5;
 
 	@Autowired
 	private UserMessageRepository userMessageRepository;
@@ -92,7 +92,7 @@ public class UserMessageRepository1DirtyTest {
 		UserMessage value = origin.get();
 		
 		assertNotNull(value);
-		assertEquals("TEST", value.getDescription());	
+		assertEquals(UserMessageConstant.TEST_USER_MESSAGE_1_DESCRIPTION, value.getDescription());	
 		
 		userMessageRepository.delete(value);
 	}
