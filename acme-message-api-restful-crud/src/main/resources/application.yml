@@ -32,13 +32,10 @@ spring:
       drop-first: true
       default-schema: acme
 
-
-#todo: make sure to always enable security in production
 security:
    basic:
       enabled: false
 
-#Management Endpoints 
 management:
    server:
       port: 8091         # Actuator port

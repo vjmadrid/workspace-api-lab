@@ -30,7 +30,7 @@ import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFacto
 		classes = { MessageApiCrudConfig.class },
 		initializers = ConfigFileApplicationContextInitializer.class
 )
-@ActiveProfiles(profiles = { DefaultSpringConfigConstant.SPRING_PROFILE_DEVELOPMENT})
+@ActiveProfiles(profiles = { DefaultSpringConfigConstant.SPRING_PROFILE_LOCAL})
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserMessageRepository1DirtyTest {
 	
