@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,12 +15,15 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 
 import com.acme.message.api.restful.crud.constant.UserMessageConstant;
 import com.acme.message.api.restful.crud.entity.UserMessage;
 import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFactory;
-import com.acme.message.api.restful.crud.repository.UserMessageRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

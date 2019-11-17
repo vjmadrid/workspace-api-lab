@@ -162,7 +162,7 @@ public class UserMessageControllerTest {
 	}
 	
 	@Test
-	public final void whenCallUpdateAndServiceValid_thenReturnHttpOKFoundAndEmptyBody() {
+	public final void whenCallUpdateAndServiceValid_thenReturnHttpOKFoundAndElementBody() {
 		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.update(UserMessageConstant.TEST_USER_MESSAGE_1_ID.longValue(), userMessageTest,request);
 				
 		assertEquals(HttpStatus.OK,responseEntity.getStatusCode());

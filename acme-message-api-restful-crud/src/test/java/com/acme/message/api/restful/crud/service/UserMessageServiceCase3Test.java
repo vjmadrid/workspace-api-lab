@@ -4,34 +4,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.acme.message.api.restful.crud.config.constant.DefaultSpringConfigConstant;
 import com.acme.message.api.restful.crud.constant.UserMessageConstant;
 import com.acme.message.api.restful.crud.entity.UserMessage;
 import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFactory;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@ActiveProfiles(profiles = { DefaultSpringConfigConstant.SPRING_PROFILE_DEVELOPMENT})
 public class UserMessageServiceCase3Test {
 
-	public int TEST_NUM_MESSAGES_LIQUIBASE = 4;
+	public int TEST_NUM_MESSAGES_LIQUIBASE = UserMessageConstant.TEST_NUM_MESSAGES;
 
 	@Autowired
 	private UserMessageService userMessageService;
@@ -42,14 +40,13 @@ public class UserMessageServiceCase3Test {
 	public void init() {
 		userMessageTest = DummyUserMessageDataFactory.createSampleDefault();
     	userMessageTest.setId(null);
-
 	}
 
 	@Test
 	public void whenCallFindAll_thenReturnElementList() {
 		List<UserMessage> result = userMessageService.findAll();
 
-		assertThat(result).hasSize(TEST_NUM_MESSAGES_LIQUIBASE);
+		assertThat(result).hasSize(TEST_NUM_MESSAGES_LIQUIBASE-1);
 		assertThat(result.get(0).getId()).isEqualTo(UserMessageConstant.TEST_USER_MESSAGE_1_ID);
 	}
 
@@ -67,17 +64,17 @@ public class UserMessageServiceCase3Test {
 	public void whenCallInsert_thenReturnElement() {
 		List<UserMessage> originList = userMessageService.findAll();
 
-		assertThat(originList).hasSize(TEST_NUM_MESSAGES_LIQUIBASE);
-		
-		UserMessage result = userMessageService.insert(userMessageTest);
-		TEST_NUM_MESSAGES_LIQUIBASE++;
+		int TEST_NUM_MESSAGES_LIQUIBASE_LOCAL = originList.size();
+			
 
+		UserMessage result = userMessageService.insert(userMessageTest);
+		
 		assertNotNull(result);
-		assertEquals(Long.valueOf(String.valueOf(TEST_NUM_MESSAGES_LIQUIBASE)), result.getId());
+		assertEquals(Long.valueOf(String.valueOf(TEST_NUM_MESSAGES_LIQUIBASE+1)), result.getId());
 		
 		List<UserMessage> updatedList = userMessageService.findAll();
 
-		assertThat(updatedList).hasSize(TEST_NUM_MESSAGES_LIQUIBASE);
+		assertThat(updatedList).hasSize(TEST_NUM_MESSAGES_LIQUIBASE_LOCAL+1);
 	}
 	
 	@Test
@@ -99,19 +96,20 @@ public class UserMessageServiceCase3Test {
     }
 	
 	@Test
+	@Order(5)
     public void whenCallDelete_thenDeleteElement() {
-		final Optional<UserMessage> foundOrigin = userMessageService.findByPK(UserMessageConstant.TEST_USER_MESSAGE_1_ID);
+		final Optional<UserMessage> foundOrigin = userMessageService.findByPK(UserMessageConstant.TEST_USER_MESSAGE_4_ID);
 		UserMessage valueFoundOrigin = foundOrigin.get();
 		
 		assertNotNull(valueFoundOrigin);
-		assertEquals(UserMessageConstant.TEST_USER_MESSAGE_1_ID, valueFoundOrigin.getId());
+		assertEquals(UserMessageConstant.TEST_USER_MESSAGE_4_ID, valueFoundOrigin.getId());
 		
-//		userMessageService.delete(valueFoundOrigin);
-//		
-//		final Optional<UserMessage> found = userMessageService.findByPK(UserMessageConstant.TEST_USER_MESSAGE_1_ID);
-//		UserMessage valueFound = found.get();
-//		
-//		assertNull(valueFound);
+		userMessageService.delete(valueFoundOrigin);	
+		
+		final Optional<UserMessage> found = userMessageService.findByPK(UserMessageConstant.TEST_USER_MESSAGE_4_ID);
+		UserMessage value = (found == null || !found.isPresent())? null:found.get();
+	
+		assertNull(value);
     }
 
 }

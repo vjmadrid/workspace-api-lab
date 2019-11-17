@@ -12,17 +12,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.acme.message.api.restful.crud.config.MessageApiCrudConfig;
+import com.acme.message.api.restful.crud.config.constant.DefaultSpringConfigConstant;
 import com.acme.message.api.restful.crud.constant.UserMessageConstant;
 import com.acme.message.api.restful.crud.entity.UserMessage;
 import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFactory;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = { MessageApiCrudConfig.class })
-//@ActiveProfiles(profiles = { DefaultSpringConfigConstant.SPRING_PROFILE_DEVELOPMENT})
+@ActiveProfiles(profiles = { DefaultSpringConfigConstant.SPRING_PROFILE_DEVELOPMENT})
 //@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserMessageRepository1NoDirtyTest {
 	

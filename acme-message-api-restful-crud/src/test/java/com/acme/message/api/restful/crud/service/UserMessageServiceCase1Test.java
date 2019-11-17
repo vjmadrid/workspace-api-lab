@@ -38,31 +38,31 @@ public class UserMessageServiceCase1Test {
 	}
 	
 	@Test
-	public void whenCallFindAll_ThenInvokeTheDaoMethod() {
+	public void whenCallFindAll_thenInvokeTheDaoMethod() {
 		userMessageService.findAll();
 		verify(userMessageRepository).findAll();
 	}
 	
 	@Test
-	public void whenCallFindByPK_ThenInvokeTheDaoMethod() {
+	public void whenCallFindByPK_thenInvokeTheDaoMethod() {
 		userMessageService.findByPK(userMessageTest.getId());
 		verify(userMessageRepository).findById(userMessageTest.getId());
 	}
 	
 	@Test
-	public void whenCallInsert_ThenInvokeTheDaoMethod() {
+	public void whenCallInsert_thenInvokeTheDaoMethod() {
 		userMessageService.insert(userMessageTest);
 		verify(userMessageRepository).save(userMessageTest);
 	}
 		
 	@Test
-	public void whenCallUpdate_ThenInvokeTheDaoMethod() {
+	public void whenCallUpdate_thenInvokeTheDaoMethod() {
 		userMessageService.update(userMessageTest);
 		verify(userMessageRepository).save(userMessageTest);
 	}
 
 	@Test
-	public void whenCallDelete_ThenInvokeTheDaoMethod() {
+	public void whenCallDelete_thenInvokeTheDaoMethod() {
 		userMessageService.delete(userMessageTest);
 		verify(userMessageRepository).delete(userMessageTest);
 	}

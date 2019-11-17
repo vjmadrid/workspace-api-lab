@@ -14,7 +14,7 @@ spring:
       change-log: classpath:db/changelog/db.changelog-master.yaml
    jpa:
       hibernate:
-         ddl-auto: none
+         dialect: org.hibernate.dialect.H2Dialect
          show-sql: true
          hbm2ddl:
             auto: update
@@ -23,12 +23,14 @@ spring:
       properties:
          hibernate:
             format_sql: true
-            generate_statistics: true
+            generate_statistics: false
    datasource:
       driver-class-name: org.h2.Driver
-      url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+      url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS acme
       username: sa
       password: sa
+      drop-first: true
+      default-schema: acme
 
 
 #todo: make sure to always enable security in production

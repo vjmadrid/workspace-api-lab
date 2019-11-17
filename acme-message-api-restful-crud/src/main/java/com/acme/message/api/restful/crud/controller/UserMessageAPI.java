@@ -45,8 +45,9 @@ public class UserMessageAPI {
     	LOG.info("Fetching UserMessage with id {}", id);
     	
     	final Optional<UserMessage> userMessageFound = userMessageService.findByPK(id);
+    	final UserMessage value = (userMessageFound == null || !userMessageFound.isPresent())? null:userMessageFound.get();
 
-        return ResponseEntity.ok(userMessageService.findByPK(id).get());
+        return ResponseEntity.ok(value);
     }
 
     @PostMapping
@@ -54,9 +55,8 @@ public class UserMessageAPI {
     	LOG.info("Creating UserMessage : {}", userMessage);
     	
     	final Optional<UserMessage> userMessageFound = userMessageService.findByPK(userMessage.getId());
-		
-		UserMessage value = userMessageFound.get();
-		
+    	final UserMessage value = (userMessageFound == null || !userMessageFound.isPresent())? null:userMessageFound.get();
+
 		userMessageService.insert(value);
     	
         return ResponseEntity.status(HttpStatus.CREATED).body(value);
@@ -67,8 +67,7 @@ public class UserMessageAPI {
     	LOG.info("Updating User with id {}", id);
     	
     	final Optional<UserMessage> userMessageFound = userMessageService.findByPK(id);
-		
-		UserMessage value = userMessageFound.get();
+    	final UserMessage value = (userMessageFound == null || !userMessageFound.isPresent())? null:userMessageFound.get();
 		
 		userMessageService.update(value);
     	
@@ -80,8 +79,9 @@ public class UserMessageAPI {
     	LOG.info("Fetching & Deleting UserMessage with id {}", id);
     	
     	final Optional<UserMessage> userMessageFound = userMessageService.findByPK(id);
-    	
-    	userMessageService.delete(userMessageFound.get());
+    	final UserMessage value = (userMessageFound == null || !userMessageFound.isPresent())? null:userMessageFound.get();
+		
+    	userMessageService.delete(value);
 
         return ResponseEntity.accepted().build();
     }

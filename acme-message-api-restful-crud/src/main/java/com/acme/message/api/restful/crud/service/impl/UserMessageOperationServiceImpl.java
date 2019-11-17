@@ -41,11 +41,9 @@ public class UserMessageOperationServiceImpl implements UserMessageOperationServ
 		return result;
 	}
 	
-	private void generateNotFoundException(Optional<UserMessage> userMessage) throws MessageApiCrudException {
+	private void generateNotFoundException(UserMessage userMessage) throws MessageApiCrudException {
 		
-		UserMessage value = userMessage.get();
-		
-		if (!UserMessageValidator.INSTANCE.isValid(value)) {
+		if (!UserMessageValidator.INSTANCE.isValid(userMessage)) {
 			throw new MessageApiCrudException(UserMessageTypeExceptionEnum.NOT_FOUND.name());
 		}
 	}
@@ -56,10 +54,10 @@ public class UserMessageOperationServiceImpl implements UserMessageOperationServ
 		
 		final Optional<UserMessage> userMessage = userMessageRepository.findById(id);
 		
-		generateNotFoundException(userMessage);
+		UserMessage value = (userMessage == null || !userMessage.isPresent())? null:userMessage.get();
 		
-		UserMessage value = userMessage.get();
-		
+		generateNotFoundException(value);
+	
 		if (UserMessageValidator.INSTANCE.isDeletedLogical(value)){
 			throw new MessageApiCrudException(UserMessageTypeExceptionEnum.IS_DELETED_LOGICAL.name());
 		}
@@ -67,7 +65,7 @@ public class UserMessageOperationServiceImpl implements UserMessageOperationServ
 		value.setDeletedDate(new Date());
 		userMessageRepository.save(value);
 		
-		LOG.trace("UserMessafe deleted logical with id : {}", id);
+		LOG.trace("UserMessage deleted logical with id : {}", id);
 	}
 	
 	public void setUserMessageRepository(UserMessageRepository userMessageRepository) {
