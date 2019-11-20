@@ -1,17 +1,38 @@
 #DEFAULT/DEV ENVIRONEMNT SETTING#
+
+# *** Configuration SERVER ***
 server:
    port: 8091
-   
+
+# *** Configuration SPRING ***   
 spring:
+
+   # *** Configuration General ***
    profiles:
       active: "@spring.profiles.active@"
    banner:
       location: classpath:custom-banner.txt
+   
+   # *** Configuration H2 ***
    h2:
       console:
          enabled : true
+   
+   # *** Configuration LiquiBase ***
    liquibase:
-      change-log: classpath:db/changelog/db.changelog-master.yaml
+      enabled: true
+      change-log: classpath:db/changelog/liquibase-changeLog.xml
+   
+   # *** Configuration Datasource ***
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://acme-mysql:3306/test?useSSL=false
+      username: root
+      password: acme-root
+      drop-first: true
+      default-schema: acme
+   
+   # *** Configuration JPA ***
    jpa:
       hibernate:
          dialect: org.hibernate.dialect.MySQL57Dialect
@@ -24,22 +45,17 @@ spring:
          hibernate:
             format_sql: false
             generate_statistics: false
-   datasource:
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://acme-mysql:3306/test?useSSL=false
-      username: root
-      password: acme-root
-      drop-first: true
-      default-schema: acme
-
+   
+# *** Configuration SECURITY ***
 security:
    basic:
       enabled: false
 
+# *** Configuration ACTUATORS ***
 management:
    server:
-      port: 8091         # Actuator port
-   endpoint:             # Enabling Endpoints
+      port: 8091         
+   endpoint:             
       shutdown:
          enabled: true   # Configure "shutdown" enabled (By default all endpoints are enabled except shutdown) 
       info:
@@ -52,6 +68,7 @@ management:
    security:
       enabled: false # management port is internal only. no need to secure it
 
+# *** Configuration INFO ACTUATOR ***
 info:
    app:
       artifact: "@project.artifactId@"
@@ -60,4 +77,4 @@ info:
       version: "@project.version@"
       java: "@java.version@"
       encoding: "@project.build.sourceEncoding@"
-      environtment: "DEFAULT/DEV"
+      environment: "DEV"

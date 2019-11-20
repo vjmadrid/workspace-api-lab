@@ -1,0 +1,21 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<include file="db/changelog/ddl/liquibase-changeLog_0_0_1_ddl.xml" />
+    
+    <changeSet author="admin" id="1">
+        <comment>Initial UserMessage schema data</comment>
+        <sqlFile path="db/changelog/dml/liquibase-changeLog_0_0_1_dml.sql" stripComments="true"/>
+    </changeSet>
+    
+     <include file="db/changelog/ddl/liquibase-changeLog_0_0_2_ddl.xml" />
+     
+     <changeSet author="admin" id="2">
+        <comment>Initial UserMessage schema data</comment>
+        <sqlFile path="db/changelog/dml/liquibase-changeLog_0_0_2_dml.sql" stripComments="true"/>
+    </changeSet>
+
+
+</databaseChangeLog>

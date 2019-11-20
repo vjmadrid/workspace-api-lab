@@ -24,21 +24,25 @@
         </rollingPolicy>
     </appender>
  
-	<logger name="com.acme.message" level="DEBUG" additivity="false">
+	<logger name="com.acme.message.api.restful.crud" level="INFO" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE_INFO" />
     </logger>
     
     <logger name="org.springframework" level="INFO" />
+    <logger name="org.hibernate.stat" level="INFO" />
+    <logger name="org.hibernate.type" level="INFO" /> 
+	<logger name="org.springframework.security" level="INFO" />
+	<logger name="liquibase" level="INFO" />
     
-    <logger name="org.hibernate.stat" level="DEBUG" />
-    
-    <logger name="org.hibernate.type" level="TRACE" />
-    
-	<logger name="org.springframework.security" level="DEBUG" />
+    <springProfile name="local">
+		<root level="INFO">
+			<appender-ref ref="STDOUT"/>
+		</root>
+	</springProfile>
     
 	<springProfile name="dev">
-		<root level="info">
+		<root level="INFO">
 			<appender-ref ref="STDOUT"/>
 		</root>
 	</springProfile>

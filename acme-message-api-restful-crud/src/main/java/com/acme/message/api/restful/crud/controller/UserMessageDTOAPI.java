@@ -34,12 +34,13 @@ public class UserMessageDTOAPI {
 	private UserMessageService userMessageService;
 	
 	private UserMessageMapper userMessageMapper;
-
+	
 	@Autowired
 	public void setUserMessageService(UserMessageService userMessageService) {
 		this.userMessageService = userMessageService;
 	}
-	
+
+	//@Autowired
 	public void setUserMessageMapper(UserMessageMapper userMessageMapper) {
 		this.userMessageMapper = userMessageMapper;
 	}

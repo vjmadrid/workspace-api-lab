@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -24,7 +26,7 @@ import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFacto
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles(profiles = { DefaultSpringConfigConstant.SPRING_PROFILE_LOCAL})
-//@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserMessageOperationServiceCase2Test {
 
 	public int TEST_NUM_MESSAGES_VIP_LIQUIBASE = 1;
@@ -48,7 +50,6 @@ public class UserMessageOperationServiceCase2Test {
 		List<UserMessage> result = userMessageOperationService.findAllVips();
 
 		assertThat(result).hasSize(TEST_NUM_MESSAGES_VIP_LIQUIBASE);
-		assertThat(result.get(0).getId()).isEqualTo(1L);
 	}
 	
 	@Test

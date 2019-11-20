@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -6,15 +7,12 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.acme.message.api.restful" level="DEBUG" />
-
-	<logger name="org.springframework" level="INFO" />
-    
-    <logger name="org.hibernate.stat" level="DEBUG" />
-    
-    <logger name="org.hibernate.type" level="TRACE" />
-    
-	<logger name="org.springframework.security" level="DEBUG" />
+	<logger name="com.acme.message.api.restful.crud" level="INFO"/>
+    <logger name="org.springframework" level="INFO" />
+    <logger name="org.hibernate.stat" level="INFO" />
+    <logger name="org.hibernate.type" level="INFO" /> 
+	<logger name="org.springframework.security" level="INFO" />
+	<logger name="liquibase" level="INFO" />
 
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />

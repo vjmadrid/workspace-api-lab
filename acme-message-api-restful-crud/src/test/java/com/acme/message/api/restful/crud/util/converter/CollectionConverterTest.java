@@ -1,8 +1,9 @@
 package com.acme.message.api.restful.crud.util.converter;
 
-import static org.junit.Assert.assertNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.junit.Test;
 
 import com.acme.message.api.restful.crud.entity.UserMessage;
 import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFactory;
+import com.acme.message.api.restful.crud.testing.JUnitTestBuilderUtil;
 
 public class CollectionConverterTest {
 
@@ -53,6 +55,12 @@ public class CollectionConverterTest {
 		assertThat(result).hasSize(userMessageList.size());
 		
 		assertThat(result).isEqualTo(userMessageList);
+	}
+	
+	@Test
+	public void whenCheckWellFormattedClass() throws NoSuchMethodException, InvocationTargetException,
+			InstantiationException, IllegalAccessException {
+		JUnitTestBuilderUtil.assertUtilityClassWellDefined(CollectionConverter.class);
 	}
 
 	

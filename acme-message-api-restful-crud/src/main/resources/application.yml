@@ -1,41 +1,61 @@
 #DEFAULT/DEV ENVIRONEMNT SETTING#
+
+# *** Configuration SERVER ***
 server:
    port: 8091
+   servlet-path: /
    
+# *** Configuration SPRING ***
 spring:
+
+   # *** Configuration General ***
    profiles:
       active: "@spring.profiles.active@"
    banner:
       location: classpath:custom-banner.txt
+      
+   # *** Configuration H2 ***
    h2:
       console:
-         enabled : false
+         enabled : true
+         
+   # *** Configuration LiquiBase ***
    liquibase:
-      change-log: classpath:db/changelog/db.changelog-master.yaml
+      enabled: true
+      change-log: classpath:db/changelog/liquibase-changeLog.xml
+      drop-first: true
+      contexts:
+   
+   # *** Configuration Datasource ***
+   datasource:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=true; #jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MYSQL;DATABASE_TO_UPPER=FALSE;
+      # DATABASE_TO_UPPER=False presenta problemas
+      username: sa
+      password: sa
+      drop-first: true
+      default-schema: 
+   
+   # *** Configuration JPA ***
    jpa:
       hibernate:
          dialect: org.hibernate.dialect.H2Dialect
          show-sql: false
          hbm2ddl:
-            auto: update
+            auto: auto
          naming:
             physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       properties:
          hibernate:
             format_sql: false
             generate_statistics: false
-   datasource:
-      driver-class-name: org.h2.Driver
-      url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MYSQL;INIT=CREATE SCHEMA IF NOT EXISTS acme
-      username: sa
-      password: sa
-      drop-first: true
-      default-schema: acme
-
+   
+# *** Configuration SECURITY ***
 security:
    basic:
       enabled: false
 
+# *** Configuration ACTUATORS ***
 management:
    server:
       port: 8091         # Actuator port
@@ -52,6 +72,7 @@ management:
    security:
       enabled: false # management port is internal only. no need to secure it
 
+# *** Configuration INFO ACTUATOR ***
 info:
    app:
       artifact: "@project.artifactId@"
@@ -60,4 +81,4 @@ info:
       version: "@project.version@"
       java: "@java.version@"
       encoding: "@project.build.sourceEncoding@"
-      environtment: "DEFAULT/DEV"
+      environment: "DEFAULT/LOCAL"
