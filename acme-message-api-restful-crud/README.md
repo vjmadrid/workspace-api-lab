@@ -1,21 +1,23 @@
-# acme-greeting-api-restful-full-build
+# acme-greeting-api-restful-crud
 
-This project represents a basic API REST with **Hello World (Greeting)** 
-
-Implementing Best Practices for the Build
-
-Invoke : localhost:<port>/greeting
-
-And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
+This project represents a basic API REST with **User Message**
 
 This projects stands out for:
 
-* Provides **Configuration classes** : Classes to configure the project (scanning package,...)
-* Provides **Constant classes** : Classes to configure the project
-* Provides **Basic classes** : Controller and Entity
+* Provides **Configuration classes** : Classes to configure the project (scanning package, web, environment...)
+* Provides **Constant Configuration classes** : Classes to configure the project
+* Provides **Constant classes** : Classes to use in the project
+* Provides **Generic classes** : Controller, Service, Repository, Entity, Validator, Util, DTO, ...
+* Provides a **Generic exception** "MessageApiCrudException" with type (Enumerate)
 * Provides **Properties Configuration File** with **Environment** (application-{environment}.yml)
 * Provides **Log Configuration File** (logback.yml)
-* Provides **Spring/Maven Profile Integration** -> dev, uat and prod
+* Provides **Spring/Maven Profile Integration**
+* Provides **Swagger** for document the Restful API
+* Provides **Docker/Docker-Compose Profile/Environment Integration**
+* Provides **Standard Surefire Test Filter with Profiles** (unit test)
+* Provides **H2 Integration**
+* Provides **Liquibase Integration**
+* Provides **Code Coverage**
 
 
 
@@ -25,6 +27,7 @@ This projects stands out for:
 * [Maven 3](https://maven.apache.org/) - Dependency Management
 * [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
 * [Spring](https://spring.io)
+* [Docker](https://www.docker.com/) - Container Technology
 
 Dependencies with architecture projects
 
@@ -32,24 +35,22 @@ N/A
 
 Third Party Dependencies
 
-* **spring-boot-starter** [2.2.0.RELEASE] : Spring Boot + Spring Framework
-* **spring-boot-starter-test** [2.2.0.RELEASE] : Spring Boot testing library
-* **spring-boot-starter-web** [2.2.0.RELEASE] : Spring Boot web library
-* **spring-boot-devtools** [2.2.0.RELEASE] : Spring Boot Dev tools Library
+* **spring-boot-starter** [Spring Boot Version] : Spring Boot + Spring Framework
+* **spring-boot-starter-test** [Spring Boot Version] : Spring Boot testing library
+* **spring-boot-starter-web** [Spring Boot Version] : Spring Boot web library
+* **spring-boot-devtools** [Spring Boot Version] : Spring Boot Dev tools Library
+* **spring-boot-starter-actuator** [Spring Boot Version] : Spring Boot Actuators Library
+* **spring-boot-starter-data-jpa** [Spring Boot Version] : Spring Boot Persistence Library
 
-Plugins
+* **h2** [Spring Boot Version] : Database in-memory
+* **liquibase-core** [Spring Boot Version] : xxx
+* **liquibase-maven-plugin** [3.8.1] : xxx
+* **commons-lang3** [Spring Boot Version] : xxx
+* **lombok** [Spring Boot Version] : xxx
+* **mapstruct** [Spring Boot Version] : xxx
+* **mysql-connector-java** [Spring Boot Version] : xxx
+* **rest-assured** [Spring Boot Version] : xxx
 
-* **spring-boot-maven-plugin** [Spring Boot Version] : Plugin used to work with Spring Boot application
-* **maven-resources-plugin** [Spring Boot Version] : Plugin used to handle the project resources
-* **maven-compiler-plugin** [Spring Boot Version] : Plugin used to compile the project source
-* **maven-verifier-plugin** [1.1] : Plugin used to verify the existence of files and directories
-* **maven-surefire-plugin** [Spring Boot Version] : Plugin used to run unit tests
-* **maven-failsafe-plugin** [Spring Boot Version] : Plugin used to run integration tests
-* **build-helper-maven-plugin** [Spring Boot Version] : Plugin used to help with Maven build lifecycle
-* **maven-enforcer-plugin** [Spring Boot Version] : Plugin used to help with the environmental constrains : JDV, Maven Version, Environment var, rules, ...
-
-
-For more details go to XXX
 
 
 ## Prerequisites
@@ -148,7 +149,8 @@ To run the jar file use the following command
 java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
 ```
 
-Use -Penvironment
+Use package environment
+
 
 
 
@@ -206,6 +208,25 @@ The service will accept HTTP GET requests at :
 http://localhost:8091/manage/<endpoint>
 ```
 
+
+## Swagger
+
+
+The service will accept HTTP GET requests at :
+
+```bash
+http://localhost:8091/v2/api-docs
+```
+
+And return JSON with meta inforamtion of the API
+
+
+Launching swagger UI swagger-ui.html
+
+
+```bash
+http://localhost:8081/swagger-ui.html
+```
 
 
 ## Versioning

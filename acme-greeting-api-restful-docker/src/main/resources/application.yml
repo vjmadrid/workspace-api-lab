@@ -1,35 +1,39 @@
 #DEFAULT/DEV ENVIRONEMNT SETTING#
+
+# *** Configuration SERVER ***
 server:
    port: 8091
    
+# *** Configuration SPRING ***
 spring:
    profiles:
       active: dev
    banner:
       location: classpath:custom-banner.txt
-  
-#todo: make sure to always enable security in production
+
+# *** Configuration SECURITY ***
 security:
    basic:
       enabled: false
 
-#Management Endpoints 
+# *** Configuration ACTUATORS ***
 management:
    server:
-      port: 8091         # Actuator port
-   endpoint:             # Enabling Endpoints
+      port: 8091
+   endpoint:
       shutdown:
-         enabled: true   # Configure "shutdown" enabled (By default all endpoints are enabled except shutdown) 
+         enabled: true
       info:
          enabled: true
    endpoints:
       web:
          base-path: /manage
          exposure:
-            include: health, info, beans, shutdown # Include endpints in web mode
+            include: health, info, beans, shutdown
    security:
-      enabled: false # management port is internal only. no need to secure it
-  
+      enabled: false
+
+# *** Configuration INFO ACTUATOR ***
 info:
    app:
       artifact: "@project.artifactId@"

@@ -31,10 +31,12 @@ N/A
 
 Third Party Dependencies
 
-* **spring-boot-starter** [2.2.0.RELEASE] : Spring Boot + Spring Framework
-* **spring-boot-starter-test** [2.2.0.RELEASE] : Spring Boot testing library
-* **spring-boot-starter-web** [2.2.0.RELEASE] : Spring Boot web library
-* **spring-boot-devtools** [2.2.0.RELEASE] : Spring Boot Dev tools Library
+* **spring-boot-starter** [Spring Boot Version] : Spring Boot + Spring Framework
+* **spring-boot-starter-test** [Spring Boot Version] : Spring Boot testing library
+* **spring-boot-starter-web** [Spring Boot Version] : Spring Boot web library
+* **spring-boot-devtools** [Spring Boot Version] : Spring Boot Dev tools Library
+* **spring-boot-starter-actuator** [Spring Boot Version] : Spring Boot Actuators Library
+
 
 
 

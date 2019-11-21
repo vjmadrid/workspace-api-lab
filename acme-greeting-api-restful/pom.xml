@@ -22,13 +22,16 @@
 	<properties>
 		<!-- Spring Boot Properties -->
 		<start-class>com.acme.greeting.api.restful.Application</start-class>
-	
+
 		<!-- Compiler & Resources -->
 		<java.version>1.8</java.version>
-		
+
 		<!-- API -->
 		<swagger.version>2.4.0</swagger.version>
 
+		<!-- Testing -->
+		<skip.unit.tests>false</skip.unit.tests>
+		<skip.integration.tests>false</skip.integration.tests>
 	</properties>
 
 	<profiles>
@@ -45,12 +48,16 @@
 			<id>uat</id>
 			<properties>
 				<spring.profiles.active>uat</spring.profiles.active>
+				<skip.unit.tests>false</skip.unit.tests>
+				<skip.integration.tests>true</skip.integration.tests>
 			</properties>
 		</profile>
 		<profile>
 			<id>prod</id>
 			<properties>
 				<spring.profiles.active>prod</spring.profiles.active>
+				<skip.unit.tests>true</skip.unit.tests>
+				<skip.integration.tests>true</skip.integration.tests>
 			</properties>
 		</profile>
 	</profiles>
@@ -85,6 +92,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -118,13 +126,37 @@
 			</plugin>
 
 			<plugin>
-				<artifactId>maven-failsafe-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>${skip.unit.tests}</skipTests>
+				</configuration>
 				<executions>
 					<execution>
+						<id>unit-tests</id>
+						<phase>test</phase>
 						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
+							<goal>test</goal>
 						</goals>
+						<configuration>
+							<skipTests>${skip.unit.tests}</skipTests>
+							<includes>
+								<include>**/*Test.java</include>
+							</includes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skipTests>${skip.integration.tests}</skipTests>
+							<includes>
+								<include>**/*TestIT.java</include>
+							</includes>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

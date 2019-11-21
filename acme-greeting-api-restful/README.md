@@ -15,6 +15,7 @@ This projects stands out for:
 * Provides **Log Configuration File** (logback.yml)
 * Provides **Spring/Maven Profile Integration**
 * Provides **Swagger** for document the Restful API
+* Provides **Standard Surefire Test Filter with Profiles** (unit & integration test)
 
 
 
@@ -31,11 +32,13 @@ N/A
 
 Third Party Dependencies
 
-* **spring-boot-starter** [2.2.0.RELEASE] : Spring Boot + Spring Framework
-* **spring-boot-starter-test** [2.2.0.RELEASE] : Spring Boot testing library
-* **spring-boot-starter-web** [2.2.0.RELEASE] : Spring Boot web library
-* **spring-boot-devtools** [2.2.0.RELEASE] : Spring Boot Dev tools Library
+* **spring-boot-starter** [Spring Boot Version]  : Spring Boot + Spring Framework
+* **spring-boot-starter-test** [Spring Boot Version]  : Spring Boot testing library
+* **spring-boot-starter-web** [Spring Boot Version]  : Spring Boot web library
+* **spring-boot-devtools** [Spring Boot Version]  : Spring Boot Dev tools Library
 
+* **springfox-swagger2** [2.4.0] : Swagger
+* **springfox-swagger-ui** [2.4.0] : Swagger UI
 
 
 ## Prerequisites
@@ -120,7 +123,6 @@ Use Spring profiles with Maven Profiles -> Special Integration
 * spring.profiles.active=@spring.profiles.active@
 * enable resource filtering
 
-
 In this case define : "dev", "uat" and "prod"
 
 ```bash
@@ -141,7 +143,7 @@ Use package environment
 
 ## Use
 
-Important : Beware of the configured port
+Important : Beware of the configured port in the application-{id_profile}.yml
 
 
 ### Use Browser
