@@ -32,3 +32,5 @@ tmp/
 *.swp
 *~.nib
 local.properties
+/.apt_generated/
+/.apt_generated_tests/

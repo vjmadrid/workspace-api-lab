@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Application",
+            "request": "launch",
+            "mainClass": "com.acme.greeting.api.restful.Application",
+            "projectName": "acme-greeting-api-restful"
+        }
+    ]
+}

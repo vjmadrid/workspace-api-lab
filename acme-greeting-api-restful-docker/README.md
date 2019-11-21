@@ -17,6 +17,8 @@ This projects stands out for:
 
 
 
+
+
 ## Technological Stack
 
 * Java 8
@@ -40,6 +42,8 @@ Third Party Dependencies
 
 
 
+
+
 ## Prerequisites
 
 Define what elements are needed to install the software
@@ -47,6 +51,8 @@ Define what elements are needed to install the software
 * Java 8 installed (1.5+ version required)
 * Maven installed  (3+)
 * Docker installed (19+)
+
+
 
 
 
@@ -70,6 +76,8 @@ Generate : JAR File
 
 
 
+
+
 ## Testing
 
 This project has tests : Unit + Integration
@@ -78,45 +86,60 @@ Execute with IDE or Maven
 
 
 
+
+
 ## Deploy
 
-Dockerize (Spring Boot + Docker)
+Spring Boot
+
+* Deploy Method 1 : Application (Spring Boot File)
+* Deploy Method 2 : Spring Boot Run
+* Deploy Method 3 : Execute JAR
+
+
+
+### Deploy Method 1 : Application (Spring Boot File)
+
+1. Execute Application.java File
+
+* Default 
+
+
+### Deploy Method 2 : Spring Boot Run
 
 1. Execute the following command
 
 ```bash
-mvn clean install
+mvn spring-boot:run
 ```
+
+
+
+
+### Deploy Method 3 : Execute JAR
+
+Use Spring profiles with Maven Profiles -> Special Integration
+
 
 Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
 
 
-2. Verify exist target/<artifact>
 
-3. Execute the following command
-
-Create a Docker image File
+1. Execute the following command
 
 ```bash
-docker build -t acme/acme-greeting-api-restful-docker .
+mvn package
+
 ```
 
-4. Verify exist image created
-
-5. Execute the following command
-
-Create a Docker container
+Execute
 
 ```bash
-docker run -p 8091:8091 -t acme/acme-greeting-api-restful-docker
+java -jar target/acme-greeting-api-restful--docker0.0.1-SNAPSHOT.jar
 ```
-
-* Execute CMD ["java", "-jar", "app/XXXX.jar"] to start application 
-
-
 ## Use
 
-Important : Beware of the configured port
+Important : Beware of the configured port in the application.yml
 
 
 ### Use Browser
@@ -149,6 +172,15 @@ And return JSON
 
 Use the "curl"
 
+```bash
+curl -X GET http://localhost:8091/greeting
+
+or
+
+curl -X GET http://localhost:8091/greeting?name=Acme
+```
+
+
 
 
 
@@ -169,11 +201,48 @@ http://localhost:8091/manage/<endpoint>
 ```
 
 
+## Dockerize
+
+Dockerize (Spring Boot + Docker)
+
+1. Execute the following command
+
+```bash
+mvn clean install
+```
+
+2. Verify exist target/<artifact> -> JAR
+
+3. Execute the following command
+
+Create a Docker image File
+
+```bash
+docker build -t acme/acme-greeting-api-restful-docker .
+```
+
+* Copy the generated JAR
+
+4. Verify exist image created
+
+5. Execute the following command
+
+Create a Docker container
+
+```bash
+docker run -p 8091:8091 -t acme/acme-greeting-api-restful-docker
+```
+
+
+
+
 
 ## Versioning
 
 **Note :** [SemVer](http://semver.org/) is used for the versioning.
 To see the available versions access the repository tags
+
+
 
 
 

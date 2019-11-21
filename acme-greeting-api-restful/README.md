@@ -16,6 +16,9 @@ This projects stands out for:
 * Provides **Spring/Maven Profile Integration**
 * Provides **Swagger** for document the Restful API
 * Provides **Standard Surefire Test Filter with Profiles** (unit & integration test)
+* Provides **Dockerfile**
+
+
 
 
 
@@ -25,6 +28,7 @@ This projects stands out for:
 * [Maven 3](https://maven.apache.org/) - Dependency Management
 * [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
 * [Spring](https://spring.io)
+* [Docker](https://www.docker.com/) - Container Technology
 
 Dependencies with architecture projects
 
@@ -32,13 +36,17 @@ N/A
 
 Third Party Dependencies
 
-* **spring-boot-starter** [Spring Boot Version]  : Spring Boot + Spring Framework
-* **spring-boot-starter-test** [Spring Boot Version]  : Spring Boot testing library
-* **spring-boot-starter-web** [Spring Boot Version]  : Spring Boot web library
-* **spring-boot-devtools** [Spring Boot Version]  : Spring Boot Dev tools Library
+* **spring-boot-starter** [Spring Boot Version] : Spring Boot + Spring Framework
+* **spring-boot-starter-test** [Spring Boot Version] : Spring Boot testing library
+* **spring-boot-starter-web** [Spring Boot Version] : Spring Boot web library
+* **spring-boot-devtools** [Spring Boot Version] : Spring Boot Dev tools Library
+* **spring-boot-starter-actuator** [Spring Boot Version] : Spring Boot Actuators Library
 
 * **springfox-swagger2** [2.4.0] : Swagger
 * **springfox-swagger-ui** [2.4.0] : Swagger UI
+
+
+
 
 
 ## Prerequisites
@@ -47,6 +55,9 @@ Define what elements are needed to install the software
 
 * Java 8 installed (1.5+ version required)
 * Maven installed  (3+)
+* Docker installed (19+)
+
+
 
 
 
@@ -70,6 +81,8 @@ Generate : JAR File
 
 
 
+
+
 ## Testing
 
 This project has tests : Unit + Integration
@@ -78,15 +91,27 @@ Execute with IDE or Maven
 
 
 
+
+
 ## Deploy
 
 Spring Boot
 
-### Deploy Method 1
+* Deploy Method 1 : Application (Spring Boot File)
+* Deploy Method 2 : Spring Boot Run
+* Deploy Method 3 : Execute JAR
+
+
+
+### Deploy Method 1 : Application (Spring Boot File)
 
 1. Execute Application.java File
 
-or 
+* Default 
+* Configure Java "Run Configurations" IDE -> Use "Environment" with -Dspring.profiles.active=<id_profile>
+
+
+### Deploy Method 2 : Spring Boot Run
 
 1. Execute the following command
 
@@ -94,49 +119,40 @@ or
 mvn spring-boot:run
 ```
 
-
-### Deploy Method 2
-
-1. Execute the following command
-
-```bash
-mvn package 
-```
-
-Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
-
-To run the jar file use the following command 
-
-```bash
-java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
-```
-
-Use default environment -> dev
+Optional : use profile
 
 
-### Deploy Method 3 : Environment
-
-1. Execute the following command
+### Deploy Method 3 : Execute JAR
 
 Use Spring profiles with Maven Profiles -> Special Integration
 
 * spring.profiles.active=@spring.profiles.active@
 * enable resource filtering
 
-In this case define : "dev", "uat" and "prod"
-
-```bash
-mvn package -Pprod
-```
 Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
 
 To run the jar file use the following command 
+
+In this case define : "dev", "uat" and "prod"
+
+1. Execute the following command
+
+```bash
+mvn package
+
+or
+
+mvn package -P<id_profile>
+```
+
+Execute
 
 ```bash
 java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
 ```
 
-Use package environment
+Use default environment -> dev or <id_profile> environment
+
 
 
 
@@ -176,6 +192,15 @@ And return JSON
 
 Use the "curl"
 
+```bash
+curl -X GET http://localhost:8091/greeting
+
+or
+
+curl -X GET http://localhost:8091/greeting?name=Acme
+```
+
+
 
 
 
@@ -196,8 +221,10 @@ http://localhost:8091/manage/<endpoint>
 ```
 
 
-## Swagger
 
+
+
+## Swagger
 
 The service will accept HTTP GET requests at :
 
@@ -212,14 +239,55 @@ Launching swagger UI swagger-ui.html
 
 
 ```bash
-http://localhost:8081/swagger-ui.html
+http://localhost:8091/swagger-ui.html
 ```
+
+
+
+
+
+## Dockerize
+
+Dockerize (Spring Boot + Docker)
+
+1. Execute the following command
+
+```bash
+mvn clean install -P<id_profile>
+```
+
+2. Verify exist target/<artifact> -> JAR
+
+3. Execute the following command
+
+Create a Docker image File
+
+```bash
+docker build -t acme/acme-greeting-api-restful .
+```
+
+* Copy the generated JAR
+
+4. Verify exist image created
+
+5. Execute the following command
+
+Create a Docker container
+
+```bash
+docker run -p 8091:8091 -t acme/acme-greeting-api-restful
+```
+
+
+
 
 
 ## Versioning
 
 **Note :** [SemVer](http://semver.org/) is used for the versioning.
 To see the available versions access the repository tags
+
+
 
 
 
