@@ -15,7 +15,9 @@ This projects stands out for:
 * Provides **Log Configuration File** (logback.yml)
 * Provides **Spring/Maven Profile Integration**
 * Provides **Swagger** for document the Restful API
+* Provides **Verify Files / Content with Verifier**
 * Provides **Standard Surefire Test Filter with Profiles** (unit & integration test)
+* Provides **Code Coverage with JACOCO** 
 * Provides **Dockerfile**
 
 

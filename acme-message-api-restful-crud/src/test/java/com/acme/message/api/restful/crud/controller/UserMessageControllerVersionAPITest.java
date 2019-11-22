@@ -9,8 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.acme.message.api.restful.crud.constant.UserMessageRestApiConstant;
-
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 

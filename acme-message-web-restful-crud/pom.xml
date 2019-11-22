@@ -4,12 +4,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.acme.greeting.api.restful</groupId>
-	<artifactId>acme-greeting-api-restful</artifactId>
+	<groupId>com.acme.message.web.restful.crud</groupId>
+	<artifactId>acme-message-web-restful-crud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>acme-greeting-api-restful</name>
+	<name>acme-message-web-restful-crud</name>
 	<description></description>
 
 	<parent>
@@ -20,43 +20,47 @@
 	</parent>
 
 	<properties>
-
 		<!-- Spring Boot Properties -->
-		<start-class>com.acme.greeting.api.restful.Application</start-class>
+		<start-class>com.acme.message.api.restful.crud.Application</start-class>
 
 		<!-- Compiler & Resources -->
 		<java.version>1.8</java.version>
-
+		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<!-- API -->
-		<swagger.version>2.4.0</swagger.version>
+		<!-- Mapstruct -->
+		<mapstruct.version>1.3.1.Final</mapstruct.version>
 
-		<!-- Verifier -->
-		<verifier.verification.file>src/test/verifier/verifications-test.xml</verifier.verification.file>
+		<!-- Lombok -->
+		<!-- <lombok.version>1.18.10</lombok.version> -->
 
 		<!-- Testing -->
 		<skip.unit.tests>false</skip.unit.tests>
-		<skip.integration.tests>false</skip.integration.tests>
+
 	</properties>
 
 	<profiles>
 		<profile>
-			<id>dev</id>
+			<id>local</id>
 			<properties>
-				<spring.profiles.active>dev</spring.profiles.active>
+				<spring.profiles.active>local</spring.profiles.active>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
 		<profile>
+			<id>dev</id>
+			<properties>
+				<spring.profiles.active>dev</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
 			<id>uat</id>
 			<properties>
 				<spring.profiles.active>uat</spring.profiles.active>
-				<skip.unit.tests>false</skip.unit.tests>
-				<skip.integration.tests>true</skip.integration.tests>
+				<skip.unit.tests>true</skip.unit.tests>
 			</properties>
 		</profile>
 		<profile>
@@ -64,7 +68,6 @@
 			<properties>
 				<spring.profiles.active>prod</spring.profiles.active>
 				<skip.unit.tests>true</skip.unit.tests>
-				<skip.integration.tests>true</skip.integration.tests>
 			</properties>
 		</profile>
 	</profiles>
@@ -88,8 +91,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		
 		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        
+        <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
@@ -103,15 +111,19 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${swagger.version}</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${swagger.version}</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
@@ -153,86 +165,6 @@
 				</configuration>
 			</plugin>
 
-			<!-- maven-verifier-plugin : Plugin used to verify the existence of files and directories -->
-			<plugin>
-				<artifactId>maven-verifier-plugin</artifactId>
-				<version>1.1</version>
-				<configuration>
-					<verificationFile>${verifier.verification.file}</verificationFile>
-					<failOnError>true</failOnError>
-				</configuration>
-				<executions>
-					<execution>
-						<id>main</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- maven-surefire-plugin : Plugin used to run unit tests - Generate reports in the directory target/surefire-reports -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skipTests>${skip.unit.tests}</skipTests>
-				</configuration>
-				<executions>
-					<execution>
-						<id>unit-tests</id>
-						<phase>test</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<configuration>
-							<skipTests>${skip.unit.tests}</skipTests>
-							<includes>
-								<include>**/*Test.java</include>
-							</includes>
-						</configuration>
-					</execution>
-					<execution>
-						<id>integration-tests</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<configuration>
-							<skipTests>${skip.integration.tests}</skipTests>
-							<includes>
-								<include>**/*TestIT.java</include>
-							</includes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- jacoco-maven-plugin : Plugin used to generate code coverage -->
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.5</version>
-				<executions>
-					<execution>
-						<id>coverage-initialize</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>coverage-report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>target/jacoco-report</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 
 		</plugins>
 	</build>

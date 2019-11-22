@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Acme Message Web Restful Crud</title>
+  <link href="https://unpkg.com/bootstrap@3.4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/usermessage.css" rel="stylesheet"/>
+</head>
+<body>
+
+	<div class="container">
+		<h1>UserMessage CRUD</h1>
+		<main id="acme-app">
+			<router-view></router-view>
+		</main>
+	</div>
+
+	<template id="usermessage">
+		<div>
+			<h2>{{ usermessage.id }}</h2>
+			<b>Description: </b>
+			<div>{{ usermessage.description }}</div>
+			<b>Vip:</b>
+			<div>{{ usermessage.vip }}</div>
+			<br/>
+			<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+			<a>
+				<router-link to="/">Back to UserMessage List</router-link>
+			</a>
+		</div>
+	</template>
+
+	<template id="usermessage-list">
+		<div>
+
+			<div id="mainActions" class="actions">  
+				<a class="btn btn-default">
+					<router-link :to="{path: '/add-usermessage'}">
+						<span class="glyphicon glyphicon-plus"></span>
+						Add UserMessage
+					</router-link>
+				</a>
+			</div>
+
+			<div id="mainFilter" class="filters row">
+				<div class="form-group col-sm-3">
+					<input id="search-element" placeholder="Search" v-model="searchKey" class="form-control" requred/>
+				</div>
+			</div>
+
+			<table id="userMessageTable" class="table">
+
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Description</th>
+						<th>Vip</th>
+						<th class="col-sm-2">Actions</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr v-for="usermessage in filteredUserMessages">
+					<!--<tr v-for="usermessage in usermessages"> -->
+					<!-- tr v-for="usermessage in usermessages | filterBy searchKey in 'name'" -->
+
+						<td>
+							<a>
+								<router-link :to="{name: 'usermessage', params: {id: usermessage.id}}">{{ usermessage.id }}</router-link>
+							</a>
+						</td>
+						<td>{{ usermessage.description }}</td>
+						<td>{{ usermessage.vip }}</td>
+						<td>Add ACTIONS</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</template>
+
+	<template id="add-usermessage">
+		<div>
+			<h2>Add New UserMessage</h2>
+
+			<form id="formUserMessage" @submit="createUserMessage">
+				<div class="form-group">
+					<label for="inputIdUserMessage">id</label>
+					<input class="form-control" id="inputIdUserMessage" v-model="usermessage.id" required/>
+				</div>
+
+				<div class="form-group">
+					<label for="areaDescriptionUserMessage">Description</label>
+					<textarea class="form-control" id="areaDescriptionUserMessage" rows="15" v-model="usermessage.description"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="checkboxVipUserMessage">Vip</label>
+					<input type="checkbox" class="form-control" id="checkboxVipUserMessage" v-model="usermessage.vip"/>
+				</div>
+
+				<button id="buttonCreateUserMessage" type="submit" class="btn btn-primary">Create</button>
+				<a class="btn btn-default">
+					<router-link to="/">Cancel</router-link>
+				</a>
+			</form>
+
+		</div>
+	</template>
+
+	<script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+	<script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+	<script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+	<script src="/usermessage.js"></script>
+
+</body>
+</html>

@@ -29,7 +29,7 @@ import com.acme.message.api.restful.crud.entity.UserMessage;
 import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFactory;
 import com.acme.message.api.restful.crud.service.UserMessageService;
 
-public class UserMessageControllerTest {
+public class UserMessageControllerMockAllTest {
 	
 	private final String MESSAGE_SOURCE_VALUE = "Error Message TEST";
 	

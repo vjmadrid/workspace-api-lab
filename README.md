@@ -5,13 +5,14 @@ This workspace is a repository that serves to **test** different aspects, techno
 this is a repository that serves to test different aspects, technologies, etc on APIs
 
 
+
 ## Technological Stack
 
 * Java 8
 * [Maven 3](https://maven.apache.org/) - Dependency Management
 * [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
 * [Spring](https://spring.io)
-* Docker
+* [Docker](https://www.docker.com/) - Container Technology
 
 
 ## Prerequisites
