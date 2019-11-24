@@ -1,7 +1,7 @@
 package com.acme.message.api.restful.crud.controller;
 
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -24,8 +24,6 @@ import com.acme.message.api.restful.crud.constant.UserMessageRestApiConstant;
 import com.acme.message.api.restful.crud.entity.UserMessage;
 import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFactory;
 import com.acme.message.api.restful.crud.service.UserMessageService;
-
-import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest

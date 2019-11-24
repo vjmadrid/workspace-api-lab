@@ -11,9 +11,10 @@ This projects stands out for:
 * Provides **Properties Configuration File** with **Environment** (application-{environment}.yml)
 * Provides **Log Configuration File** (logback.yml)
 * Provides **Spring/Maven Profile Integration**
+* Provides **Mapper Entity - DTO**
 * Provides **Docker/Docker-Compose Profile/Environment Integration**
 * Provides **Standard Surefire Test Filter with Profiles** (unit test)
-* Provides **Code Coverage**
+* Provides **Code Coverage** with **Jacoco**
 
 
 

@@ -1,7 +1,7 @@
 package com.acme.message.api.restful.crud.testing;
 
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertThat;
 
 import org.hamcrest.Matcher;
 import org.junit.Before;

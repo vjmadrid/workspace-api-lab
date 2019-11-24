@@ -115,7 +115,6 @@ mvn spring-boot:run
 
 
 
-
 ### Deploy Method 3 : Execute JAR
 
 Use Spring profiles with Maven Profiles -> Special Integration

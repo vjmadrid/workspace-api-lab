@@ -14,6 +14,7 @@ import com.acme.message.api.restful.crud.repository.UserMessageRepository;
 import com.acme.message.api.restful.crud.service.UserMessageService;
 import com.acme.message.api.restful.crud.util.converter.CollectionConverter;
 
+
 @Service("userMessageService")
 @Transactional(readOnly = true)
 public class UserMessageServiceImpl implements UserMessageService {

@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import com.acme.message.api.restful.crud.constant.UserMessageConstant;
 import com.acme.message.api.restful.crud.entity.UserMessage;
-import com.acme.message.api.restful.crud.factory.dummy.DummyUserMessageDataFactory;
 
 public class DummyUserMessageDataFactoryTest {
 

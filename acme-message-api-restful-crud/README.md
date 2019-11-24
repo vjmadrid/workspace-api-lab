@@ -17,7 +17,11 @@ This projects stands out for:
 * Provides **Standard Surefire Test Filter with Profiles** (unit test)
 * Provides **H2 Integration**
 * Provides **Liquibase Integration**
-* Provides **Code Coverage**
+* Provides **Code Coverage** with *Jacoco*
+* Provides **Dockerfile**
+* Provides **Docker Compose** with : App + Mysql 5.7
+
+
 
 
 
@@ -28,7 +32,8 @@ This projects stands out for:
 * [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
 * [Spring](https://spring.io)
 * [Docker](https://www.docker.com/) - Container Technology
-* [Docker Compose](https://docs.docker.com/compose/) - Contaienr Technology
+* [Docker Compose](https://docs.docker.com/compose/) - Multi-Container Technology (Define & Run)
+* [MySQL](https://www.mysql.com/) - Relational Database
 
 Dependencies with architecture projects
 
@@ -44,13 +49,13 @@ Third Party Dependencies
 * **spring-boot-starter-data-jpa** [Spring Boot Version] : Spring Boot Persistence Library
 
 * **h2** [Spring Boot Version] : Database in-memory
-* **liquibase-core** [Spring Boot Version] : xxx
-* **liquibase-maven-plugin** [3.8.1] : xxx
-* **commons-lang3** [Spring Boot Version] : xxx
-* **lombok** [Spring Boot Version] : xxx
-* **mapstruct** [Spring Boot Version] : xxx
-* **mysql-connector-java** [Spring Boot Version] : xxx
-* **rest-assured** [Spring Boot Version] : xxx
+* **liquibase-core** [Spring Boot Version] : Database changes manager
+* **liquibase-maven-plugin** [3.8.1] : Plugin for to use liquibase with Maven
+* **commons-lang3** [Spring Boot Version] : Java Utility Class
+* **lombok** [Spring Boot Version] : Java Utility Class for : getter, setter, equals, etc.
+* **mapstruct** [Spring Boot Version] : Mapper Cñass
+* **mysql-connector-java** [Spring Boot Version] : Connection with Database MySQL
+* **rest-assured** [Spring Boot Version] : Testing of REST services
 
 
 

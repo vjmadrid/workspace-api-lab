@@ -1,0 +1,80 @@
+#DEFAULT/DEV ENVIRONEMNT SETTING#
+
+# *** Configuration SERVER ***
+server:
+   port: 8091
+
+# *** Configuration SPRING ***   
+spring:
+
+   # *** Configuration General ***
+   profiles:
+      active: "@spring.profiles.active@"
+   banner:
+      location: classpath:custom-banner.txt
+   
+   # *** Configuration H2 ***
+   h2:
+      console:
+         enabled : true
+   
+   # *** Configuration LiquiBase ***
+   liquibase:
+      enabled: false
+      change-log: xxx
+   
+   # *** Configuration Datasource ***
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: xxx
+      username: root
+      password: xxx
+      drop-first: true
+      default-schema: acme
+   
+   # *** Configuration JPA ***
+   jpa:
+      hibernate:
+         dialect: org.hibernate.dialect.MySQL57Dialect
+         show-sql: false
+         hbm2ddl:
+            auto: none
+         naming:
+            physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      properties:
+         hibernate:
+            format_sql: false
+            generate_statistics: false
+   
+# *** Configuration SECURITY ***
+security:
+   basic:
+      enabled: false
+
+# *** Configuration ACTUATORS ***
+management:
+   server:
+      port: 8091         
+   endpoint:             
+      shutdown:
+         enabled: true   # Configure "shutdown" enabled (By default all endpoints are enabled except shutdown) 
+      info:
+         enabled: true
+   endpoints:
+      web:
+         base-path: /manage
+         exposure:
+            include: health, info, beans, shutdown # Include endpints in web mode
+   security:
+      enabled: false # management port is internal only. no need to secure it
+
+# *** Configuration INFO ACTUATOR ***
+info:
+   app:
+      artifact: "@project.artifactId@"
+      name: "@project.name@"
+      description: "@project.description@"
+      version: "@project.version@"
+      java: "@java.version@"
+      encoding: "@project.build.sourceEncoding@"
+      environment: "PROD"
