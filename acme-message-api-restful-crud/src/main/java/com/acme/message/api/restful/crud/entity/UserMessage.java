@@ -1,5 +1,6 @@
 package com.acme.message.api.restful.crud.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "usermessage")
@@ -31,9 +34,11 @@ public class UserMessage extends AbstractEntity {
 	@Column(name = "vip")
 	private boolean vip;
 
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")	
 	@Column(name = "creationdate")
 	private Date creationDate;
 	
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name = "deleteddate")
 	private Date deletedDate;
 
@@ -105,12 +110,13 @@ public class UserMessage extends AbstractEntity {
 
 	@Override
 	public String toString() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
 	            .append("id", id)
 	            .append("description", description)
 	            .append("vip", vip)
-	            .append("creationDate", creationDate)
-	            .append("deletedDate", deletedDate)
+	            .append("creationDate", (creationDate==null?null:dateFormat.format(creationDate)))
+	            .append("deletedDate", (deletedDate==null?null:dateFormat.format(deletedDate)))
 	            .toString();
 	}
 	

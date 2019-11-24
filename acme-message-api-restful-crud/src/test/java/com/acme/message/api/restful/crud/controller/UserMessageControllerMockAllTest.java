@@ -130,15 +130,6 @@ public class UserMessageControllerMockAllTest {
 	}
 	
 	@Test
-	public final void whenCallInsertAndServiceIsExist_thenReturnHttpConflictAndEmptyBody() {
-		System.out.println("****** whenCallInsertAndServiceIsExist_thenReturnHttpConflictAndEmptyBody");
-		final ResponseEntity<UserMessage> responseEntity = (ResponseEntity<UserMessage>) userMessageController.insert(userMessageTest,uriComponentsBuilder,request);
-		
-		assertEquals(HttpStatus.CONFLICT,responseEntity.getStatusCode());
-		assertNotNull(responseEntity.getBody());
-	}
-	
-	@Test
 	public final void whenCallInsertAndServiceIsValid_thenReturnHttpCreatedAndHeaders() {
 		UserMessage userMessageLocalTest = null;
 		when(userMessageService.findByPK(anyLong())).thenReturn(Optional.ofNullable(userMessageLocalTest));

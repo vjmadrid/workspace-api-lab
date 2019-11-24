@@ -1,5 +1,6 @@
 package com.acme.message.api.restful.crud.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,8 @@ public class UserMessageServiceImpl implements UserMessageService {
 	@Transactional
 	public UserMessage insert(UserMessage userMessage) {
 		LOG.trace("Insert UserMessage");
+		
+		userMessage.setCreationDate(new Date());
 		
 		return userMessageRepository.save(userMessage);
 	}

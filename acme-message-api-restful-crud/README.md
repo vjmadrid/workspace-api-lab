@@ -11,6 +11,7 @@ This projects stands out for:
 * Provides a **Generic exception** "MessageApiCrudException" with type (Enumerate)
 * Provides **Properties Configuration File** with **Environment** (application-{environment}.yml)
 * Provides **Log Configuration File** (logback.yml)
+* Provides **All type of Test**
 * Provides **Spring/Maven Profile Integration**
 * Provides **Swagger** for document the Restful API
 * Provides **Docker/Docker-Compose Profile/Environment Integration**
@@ -205,9 +206,20 @@ curl -i -X GET -H "Content-Type:application/json" http://localhost:8091/api/v1/u
 
 POST insert
 ```bash
-curl -i -X POST -H "Content-Type:application/json" -d "{\"id\" : 5, \"description\" : \"Test Description 5\", \"vip\" : false}"  http://localhost:8091/api/v1/usermessages
+curl -i -X POST -H "Content-Type:application/json" -d "{\"id\":null,\"description\":\"Test Description\",\"vip\":false,\"creationDate\":null,\"deletedDate\":null}"  http://localhost:8091/api/v1/usermessages
 ```
 
+curl -i -X POST -H "Content-Type:application/json" -d "{\"description\":\"Test Description\",\"vip\":false}"  http://localhost:8091/api/v1/usermessages
+
+PUT update
+```bash
+curl -i -X PUT -H "Content-Type:application/json" -d "{\"description\":\"Test Description\",\"vip\":false}"  http://localhost:8091/api/v1/usermessages/2
+```
+
+DELETE delete
+```bash
+curl -i -X DELETE -H "Content-Type:application/json" http://localhost:8091/api/v1/usermessages/4
+```
 
 
 

@@ -84,17 +84,6 @@ public class UserMessageController {
 			HttpServletRequest request) {
 		LOG.info("Creating UserMessage : {}", userMessage);
 		
-		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(userMessage.getId());
-		
-		UserMessage value = (userMessageFound == null || !userMessageFound.isPresent())? null:userMessageFound.get();
-		
-		if (UserMessageValidator.INSTANCE.isValid(value)) {
-			final String errorMessage = generateErrorMessage(UserMessageRestApiConstant.MESSAGE_EXIST,
-					new Object[] { userMessage.getId() }, request);
-			LOG.error(errorMessage);
-			return new ResponseEntity<Object>(new CustomErrorTypeMessage(errorMessage), HttpStatus.CONFLICT);
-		}
-
 		userMessageService.insert(userMessage);
 
 		HttpHeaders headers = new HttpHeaders();
@@ -106,7 +95,7 @@ public class UserMessageController {
 	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody UserMessage userMessage,
 			HttpServletRequest request) {
 		LOG.info("Updating User with id {}", id);
-		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(userMessage.getId());
+		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(id);
 		
 		UserMessage value = (userMessageFound == null || !userMessageFound.isPresent())? null:userMessageFound.get();
 
@@ -119,7 +108,9 @@ public class UserMessageController {
 
 		value.setDescription(userMessage.getDescription());
 		value.setVip(userMessage.isVip());
-
+		value.setCreationDate(userMessage.getCreationDate());
+		value.setDeletedDate(userMessage.getDeletedDate());
+		
 		userMessageService.update(value);
 		return new ResponseEntity<UserMessage>(value, HttpStatus.OK);
 	}
