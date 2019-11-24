@@ -11,10 +11,7 @@ This projects stands out for:
 * Provides **Properties Configuration File** with **Environment** (application-{environment}.yml)
 * Provides **Log Configuration File** (logback.yml)
 * Provides **Spring/Maven Profile Integration**
-* Provides **Mapper Entity - DTO**
-* Provides **Docker/Docker-Compose Profile/Environment Integration**
-* Provides **Standard Surefire Test Filter with Profiles** (unit test)
-* Provides **Code Coverage** with **Jacoco**
+* Provides **Docker Integration**
 
 
 
@@ -42,12 +39,9 @@ Third Party Dependencies
 * **spring-boot-starter-actuator** [Spring Boot Version] : Spring Boot Actuators Library
 * **spring-boot-starter-freemarker** [Spring Boot Version] : Spring Boot Template
 
-* **liquibase-maven-plugin** [3.8.1] : xxx
-* **commons-lang3** [Spring Boot Version] : xxx
-* **lombok** [Spring Boot Version] : xxx
-* **mapstruct** [Spring Boot Version] : xxx
-* **mysql-connector-java** [Spring Boot Version] : xxx
-* **rest-assured** [Spring Boot Version] : xxx
+* **commons-lang3** [Spring Boot Version] : Java Utility Class
+* **lombok** [Spring Boot Version] : Java Utility Class for : getter, setter, equals, etc.
+* **rest-assured** [Spring Boot Version] : Testing of REST services
 
 
 
@@ -152,7 +146,7 @@ mvn package -P<id_profile>
 Execute
 
 ```bash
-java -jar target/acme-greeting-web-restful-0.0.1-SNAPSHOT.jar
+java -jar target/acme-message-web-restful-crud-0.0.1-SNAPSHOT.jar
 ```
 
 Use default environment -> dev or <id_profile> environment
@@ -171,30 +165,21 @@ Important : Beware of the configured port in the application-{id_profile}.yml
 The service will accept HTTP GET requests at :
 
 ```bash
-http://localhost:8091/greeting
+http://localhost:8090/
 ```
 
-And return JSON
+And return Web Page (Application)
 
-```bash
-{"id":1,"content":"Hello, World!","responseTime":"???"}
-```
 
-The service will accept HTTP GET requests at :
-
-```bash
-http://localhost:8091/greeting?name=Acme
-```
-
-And return JSON
-
-```bash
-{"id":1,"content":"Hello, Acme!","responseTime":"???"}
-```
 
 ### Use "curl"
 
 N/A
+
+
+
+
+
 ## Use Actuators Endpoints
 
 Important : Beware of the configured port
@@ -240,7 +225,7 @@ mvn clean install -P<id_profile>
 Create a Docker image File
 
 ```bash
-docker build -t acme/acme-greeting-web-restful .
+docker build -t acme/acme-message-web-restful-crud .
 ```
 
 * Copy the generated JAR
@@ -252,7 +237,7 @@ docker build -t acme/acme-greeting-web-restful .
 Create a Docker container
 
 ```bash
-docker run -p 8090:8090 -t acme/acme-greeting-web-restful
+docker run -p 8090:8090 -t acme/acme-message-web-restful-crud
 ```
 
 

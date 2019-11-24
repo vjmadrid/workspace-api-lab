@@ -18,7 +18,9 @@ This projects stands out for:
 * Provides **Standard Surefire Test Filter with Profiles** (unit test)
 * Provides **H2 Integration**
 * Provides **Liquibase Integration**
-* Provides **Code Coverage** with *Jacoco*
+* Provides **Code Coverage** with **Jacoco**
+* Provides **CORS (Cross-Origin Resource Sharing ) Integration** with **Controller**
+* Provices **cURL REST References**
 * Provides **Dockerfile**
 * Provides **Docker Compose** with : App + Mysql 5.7
 

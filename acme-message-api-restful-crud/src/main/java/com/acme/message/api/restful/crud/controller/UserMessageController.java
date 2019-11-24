@@ -13,6 +13,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ import com.acme.message.api.restful.crud.validator.UserMessageValidator;
 @RestController
 @RequestMapping(UserMessageRestApiConstant.MAPPING)
 @Transactional
+@CrossOrigin(origins = "*")
 public class UserMessageController {
 
 	public static final Logger LOG = LoggerFactory.getLogger(UserMessageController.class);

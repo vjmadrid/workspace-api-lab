@@ -1,6 +1,6 @@
 var usermessages = [];
 
-var API_MAPPING = 'http://localhost:8091/api/v1/usermessages'
+var API_MAPPING = 'http://localhost:8091/api/v1/usermessages/'
 
 function findUserMessage (id) {
   return usermessages[findUserMessageKey(id)];
@@ -25,7 +25,7 @@ var userMessageService = {
 
   findById(id, fn) {
     axios
-      .get(API_MAPPING+'/' + id)
+      .get(API_MAPPING + id)
       .then(response => fn(response))
       .catch(error => console.log(error))
   },
@@ -33,6 +33,20 @@ var userMessageService = {
   create(usermessage, fn) {
     axios
       .post(API_MAPPING, usermessage)
+      .then(response => fn(response))
+      .catch(error => console.log(error))
+  },
+
+  update(id, usermessage, fn) {
+    axios
+      .put(API_MAPPING + id, usermessage)
+      .then(response => fn(response))
+      .catch(error => console.log(error))
+  },
+
+  delete(id, fn) {
+    axios
+      .delete(API_MAPPING + id)
       .then(response => fn(response))
       .catch(error => console.log(error))
   }
@@ -61,7 +75,7 @@ var UserMessageList = Vue.extend({
 var UserMessage = Vue.extend({
   template: '#usermessage',
   data: function () {
-    return {usermessages: findUserMessage(this.$route.params.id)};
+    return {usermessage: findUserMessage(this.$route.params.id)};
   }
 });
 
@@ -79,11 +93,37 @@ var AddUserMessage = Vue.extend({
   }
 });
 
+var EditUserMessage = Vue.extend({
+  template: '#edit-usermessage',
+  data: function () {
+    return {usermessage: findUserMessage(this.$route.params.id)};
+  },
+  methods: {
+    updateUserMessage: function () {
+      userMessageService.update(this.usermessage.id, this.usermessage, r => router.push('/'))
+    }
+  }
+});
+
+var DeleteUserMessage = Vue.extend({
+  template: '#delete-usermessage',
+  data: function () {
+    return {usermessage: findUserMessage(this.$route.params.id)};
+  },
+  methods: {
+    deleteUserMessage: function () {
+      userMessageService.delete(this.usermessage.id, r => router.push('/'))
+    }
+  }
+});
+
 var router = new VueRouter({
 	routes: [
 		{path: '/', component: UserMessageList},
 		{path: '/usermessages/:id', component: UserMessage, name: 'usermessage'},
     {path: '/add-usermessage', component: AddUserMessage},
+    {path: '/usermessages/:id/edit', component: EditUserMessage, name: 'edit-usermessage'},
+    {path: '/usermessages/:id/delete', component: DeleteUserMessage, name: 'delete-usermessage'}
   ]
 });
 
