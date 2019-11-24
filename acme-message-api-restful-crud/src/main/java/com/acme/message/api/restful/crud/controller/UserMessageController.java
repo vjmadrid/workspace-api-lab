@@ -28,6 +28,13 @@ import com.acme.message.api.restful.crud.entity.UserMessage;
 import com.acme.message.api.restful.crud.service.UserMessageService;
 import com.acme.message.api.restful.crud.validator.UserMessageValidator;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@Api(description = "Endpoints for CRUD of UserMessages",
+tags = {"usermessage"})
 @RestController
 @RequestMapping(UserMessageRestApiConstant.MAPPING)
 @Transactional
@@ -42,6 +49,10 @@ public class UserMessageController {
 	@Autowired
 	private UserMessageService userMessageService;
 	
+	@ApiOperation(value = "Find All UserMessages", notes = "Notes XXX", tags = { "usermessage" })
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Successful operation", response=List.class )  }
+    )	    
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UserMessage>> findAll() {
 		LOG.info("Find All UserMessage");

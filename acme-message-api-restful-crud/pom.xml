@@ -25,7 +25,7 @@
 
 		<!-- Compiler & Resources -->
 		<java.version>1.8</java.version>
-		
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -35,11 +35,14 @@
 		<!-- Testing -->
 		<skip.unit.tests>false</skip.unit.tests>
 
+		<cdc.base-class>com.acme.message.api.restful.crud.cdc.CDCBaseTestClass</cdc.base-class>
+		<cdc.spring.cloud.version>2.1.1.RELEASE</cdc.spring.cloud.version>
+
 		<!-- Liquibase -->
 		<liquibase.maven.plugin.version>3.8.1</liquibase.maven.plugin.version>
 
 		<!-- API -->
-		<swagger.version>2.4.0</swagger.version>
+		<swagger.version>2.9.2</swagger.version>
 
 	</properties>
 
@@ -157,7 +160,7 @@
 			<artifactId>rest-assured</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -182,7 +185,7 @@
 		</resources>
 
 		<plugins>
-		
+
 			<!-- spring-boot-maven-plugin : Plugin used to work with Spring Boot application -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -207,18 +210,19 @@
 					<target>${java.version}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
-				
+
 			</plugin>
 
-			
-			<!-- maven-surefire-plugin : Plugin used to run unit tests - Generate reports in the directory target/surefire-reports -->
+
+			<!-- maven-surefire-plugin : Plugin used to run unit tests - Generate 
+				reports in the directory target/surefire-reports -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
@@ -230,7 +234,7 @@
 					<testFailureIgnore>true</testFailureIgnore>
 				</configuration>
 			</plugin>
-			
+
 			<!-- jacoco-maven-plugin : Plugin used to generate code coverage -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
@@ -293,8 +297,6 @@
 				</configuration>
 
 			</plugin>
-
-
 
 		</plugins>
 	</build>
