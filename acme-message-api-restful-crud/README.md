@@ -111,11 +111,21 @@ Execute with IDE or Maven
 
 Spring Boot
 
-### Deploy Method 1
+* Deploy Method 1 : Application (Spring Boot File)
+* Deploy Method 2 : Spring Boot Run
+* Deploy Method 3 : Execute JAR
+
+
+
+### Deploy Method 1 : Application (Spring Boot File)
 
 1. Execute Application.java File
 
-or 
+* Default 
+* Configure Java "Run Configurations" IDE -> Use "Environment" with -Dspring.profiles.active=<id_profile>
+
+
+### Deploy Method 2 : Spring Boot Run
 
 1. Execute the following command
 
@@ -123,57 +133,47 @@ or
 mvn spring-boot:run
 ```
 
-
-### Deploy Method 2
-
-1. Execute the following command
-
-```bash
-mvn package 
-```
-
-Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
-
-To run the jar file use the following command 
-
-```bash
-java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
-```
-
-Use default environment -> dev
+Optional : use profile
 
 
-### Deploy Method 3 : Environment
-
-1. Execute the following command
+### Deploy Method 3 : Execute JAR
 
 Use Spring profiles with Maven Profiles -> Special Integration
 
 * spring.profiles.active=@spring.profiles.active@
 * enable resource filtering
 
-
-In this case define : "dev", "uat" and "prod"
-
-```bash
-mvn package -Pprod
-```
 Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
 
 To run the jar file use the following command 
+
+In this case define : "dev", "uat" and "prod"
+
+1. Execute the following command
+
+```bash
+mvn package
+
+or
+
+mvn package -P<id_profile>
+```
+
+Execute
 
 ```bash
 java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
 ```
 
-Use package environment
+Use default environment -> dev or <id_profile> environment
+
 
 
 
 
 ## Use
 
-Important : Beware of the configured port
+Important : Beware of the configured port in the application-{id_profile}.yml
 
 
 ### Use Browser
@@ -190,38 +190,46 @@ And return JSON
 {"id":2,"description":"Test Description 2","vip":false,"creationDate":"2019-11-22T19:30:53.384+0000","deletedDate":null}
 ```
 
+Use other operations
 
 
 
 
 ### Use "curl"
 
-GET FindAll
+
 ```bash
 curl -i -X GET -H "Content-Type:application/json" http://localhost:8091/api/v1/usermessages
 ```
 
 GET findByPk = 2
+
 ```bash
 curl -i -X GET -H "Content-Type:application/json" http://localhost:8091/api/v1/usermessages/2
 ```
 
 POST insert
+
 ```bash
 curl -i -X POST -H "Content-Type:application/json" -d "{\"id\":null,\"description\":\"Test Description\",\"vip\":false,\"creationDate\":null,\"deletedDate\":null}"  http://localhost:8091/api/v1/usermessages
 ```
 
 curl -i -X POST -H "Content-Type:application/json" -d "{\"description\":\"Test Description\",\"vip\":false}"  http://localhost:8091/api/v1/usermessages
 
+
 PUT update
+
 ```bash
 curl -i -X PUT -H "Content-Type:application/json" -d "{\"description\":\"Test Description\",\"vip\":false}"  http://localhost:8091/api/v1/usermessages/2
 ```
 
 DELETE delete
+
 ```bash
 curl -i -X DELETE -H "Content-Type:application/json" http://localhost:8091/api/v1/usermessages/4
 ```
+
+
 
 
 
@@ -247,7 +255,6 @@ http://localhost:8091/manage/<endpoint>
 
 ## Swagger
 
-
 The service will accept HTTP GET requests at :
 
 ```bash
@@ -261,8 +268,26 @@ Launching swagger UI swagger-ui.html
 
 
 ```bash
-http://localhost:8081/swagger-ui.html
+http://localhost:8091/swagger-ui.html
 ```
+
+
+
+
+
+## Dockerize
+
+Dockerize (Spring Boot + Docker) with Docker Compose
+
+1. Execute the following command
+
+```bash
+docker-compose up
+```
+* Service "acme-mysql" : Run MySQL 5.7 Database
+* Service "app" : Run App with Profile : Dev
+
+
 
 
 

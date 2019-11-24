@@ -38,6 +38,9 @@
 		<!-- Liquibase -->
 		<liquibase.maven.plugin.version>3.8.1</liquibase.maven.plugin.version>
 
+		<!-- API -->
+		<swagger.version>2.4.0</swagger.version>
+
 	</properties>
 
 	<profiles>
@@ -153,6 +156,18 @@
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
 		</dependency>
 
 	</dependencies>
