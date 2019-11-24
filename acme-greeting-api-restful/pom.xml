@@ -20,7 +20,6 @@
 	</parent>
 
 	<properties>
-
 		<!-- Spring Boot Properties -->
 		<start-class>com.acme.greeting.api.restful.Application</start-class>
 
@@ -31,7 +30,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- API -->
-		<swagger.version>2.4.0</swagger.version>
+		<swagger.version>2.9.2</swagger.version>
 
 		<!-- Verifier -->
 		<verifier.verification.file>src/test/verifier/verifications-test.xml</verifier.verification.file>
