@@ -2,6 +2,6 @@ FROM nginx:alpine
 
 EXPOSE 80
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY /conf.d/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 CMD ["nginx", "-g", "daemon off;"]

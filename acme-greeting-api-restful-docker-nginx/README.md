@@ -2,7 +2,7 @@
 
 This project represents a basic API REST with **Hello World (Greeting)** with **Docker**
 
-Invoke : localhost:<port>/greeting
+Invoke : localhost:port/greeting
 
 And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
 
@@ -23,7 +23,7 @@ This projects stands out for:
 * [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
 * [Spring](https://spring.io)
 * [Docker](https://www.docker.com/) - Container Technology
-
+* [Nginx](https://www.nginx.com/) - Web Server & Inverse Proxy -> High Performance Load Balancer
 
 Dependencies with architecture projects
 
@@ -31,10 +31,13 @@ N/A
 
 Third Party Dependencies
 
-* **spring-boot-starter** [2.2.0.RELEASE] : Spring Boot + Spring Framework
-* **spring-boot-starter-test** [2.2.0.RELEASE] : Spring Boot testing library
-* **spring-boot-starter-web** [2.2.0.RELEASE] : Spring Boot web library
-* **spring-boot-devtools** [2.2.0.RELEASE] : Spring Boot Dev tools Library
+* **spring-boot-starter** [Spring Boot Version] : Spring Boot + Spring Framework
+* **spring-boot-starter-test** [Spring Boot Version] : Spring Boot testing library
+* **spring-boot-starter-web** [Spring Boot Version] : Spring Boot web library
+* **spring-boot-devtools** [[Spring Boot Version] : Spring Boot Dev tools Library
+
+
+
 
 
 ## Prerequisites
@@ -44,6 +47,9 @@ Define what elements are needed to install the software
 * Java 8 installed (1.5+ version required)
 * Maven installed  (3+)
 * Docker installed (19+)
+
+
+
 
 
 ## Installation
@@ -65,6 +71,9 @@ The result will be the generation of an artifact in your Maven repository (local
 Generate : JAR File
 
 
+
+
+
 ## Testing
 
 This project has tests : Unit + Integration
@@ -72,9 +81,145 @@ This project has tests : Unit + Integration
 Execute with IDE or Maven
 
 
+
+
+
 ## Deploy
 
-### Container "app"
+Spring Boot
+
+* Deploy Method 1 : Application (Spring Boot File)
+* Deploy Method 2 : Spring Boot Run
+* Deploy Method 3 : Execute JAR
+
+
+
+### Deploy Method 1 : Application (Spring Boot File)
+
+1. Execute Application.java File
+
+* Default 
+
+
+### Deploy Method 2 : Spring Boot Run
+
+1. Execute the following command
+
+```bash
+mvn spring-boot:run
+```
+
+
+
+### Deploy Method 3 : Execute JAR
+
+Use Spring profiles with Maven Profiles -> Special Integration
+
+* spring.profiles.active=@spring.profiles.active@
+* enable resource filtering
+
+Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
+
+To run the jar file use the following command 
+
+In this case define : "dev", "uat" and "prod"
+
+1. Execute the following command
+
+```bash
+mvn package
+
+or
+
+mvn package -P<id_profile>
+```
+
+Execute
+
+```bash
+java -jar target/acme-greeting-api-restful-docker-nginx-0.0.1-SNAPSHOT.jar
+```
+
+
+
+
+
+
+## Use
+
+Important : Beware of the configured port in the application-{id_profile}.yml
+
+
+### Use Browser
+
+The service will accept HTTP GET requests at :
+
+```bash
+http://localhost:8080/greeting
+```
+
+And return JSON
+
+```bash
+{"id":1,"content":"Hello, World!","responseTime":"???"}
+```
+
+The service will accept HTTP GET requests at :
+
+```bash
+http://localhost:8080/greeting?name=Acme
+```
+
+And return JSON
+
+```bash
+{"id":1,"content":"Hello, Acme!","responseTime":"???"}
+```
+
+### Use "curl"
+
+Use the "curl"
+
+```bash
+curl -X GET http://localhost:8080/greeting
+
+or
+
+curl -X GET http://localhost:8080/greeting?name=Acme
+```
+
+
+
+
+
+## Use Actuators Endpoints
+
+Important : Beware of the configured port
+
+The actuators endpoints are configured in the application.yml
+* Port : 8080
+* Based-path : /manage
+
+Example : http://localhost:8080/manage/info
+
+The service will accept HTTP GET requests at :
+
+```bash
+http://localhost:8080/manage/<endpoint>
+```
+
+
+
+
+
+# Swagger
+
+N/A
+
+
+
+
+## Dockerize
 
 Dockerize (Spring Boot + Docker)
 
@@ -84,10 +229,7 @@ Dockerize (Spring Boot + Docker)
 mvn clean install
 ```
 
-Package the application in a single/fat JAR file (executable JAR + All dependencies + Embedded Servlet Container if its a web applications)
-
-
-2. Verify exist target/<artifact>
+2. Verify exist target/<artifact> -> JAR
 
 3. Execute the following command
 
@@ -97,10 +239,7 @@ Create a Docker image File
 docker build -t acme/acme-greeting-api-restful-docker-nginx .
 ```
 
-Create 3
-
-docker build -t acme/acme-greeting-api-restful-docker-nginx-1 .
-
+* Copy the generated JAR
 
 4. Verify exist image created
 
@@ -121,66 +260,30 @@ docker run -p 8091:8091 -t acme/acme-greeting-api-restful-docker-nginx
 
 2. Access "nginx/"
 
-2. Execute the following command
+* Copy the generated JAR
 
-Create a Docker image File
+### Docker compose
+
+Execute the following command
+
+Create a Docker container
 
 ```bash
-docker build -t acme/acme-nginx .
+docker-compose up
 ```
 
 
 
-## Use
-
-Important : Beware of the configured port
-
-### Use Browser
-
-The service will accept HTTP GET requests at :
-
-```bash
-http://localhost:8091/greeting
-```
-
-And return JSON
-
-```bash
-{"id":1,"content":"Hello, World!","responseTime":"???"}
-```
-
-The service will accept HTTP GET requests at :
-
-```bash
-http://localhost:8091/greeting?name=Acme
-```
-
-And return JSON
-
-```bash
-{"id":1,"content":"Hello, Acme!","responseTime":"???"}
-```
-
-### Use "curl"
-
-User the "curl"
-
-
-## Use Actuators Endpoints
-
-Important : Beware of the configured port
-
-The actuators endpoints are configured in the application.yml
-* Port : 8091
-* Based-path : /manage
-
-Example : http://localhost:8091/manage/info
 
 
 ## Versioning
 
 **Note :** [SemVer](http://semver.org/) is used for the versioning.
 To see the available versions access the repository tags
+
+
+
+
 
 ## Authors
 
