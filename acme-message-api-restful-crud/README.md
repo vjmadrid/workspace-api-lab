@@ -8,6 +8,7 @@ This projects stands out for:
 * Provides **Constant Configuration classes** : Classes to configure the project
 * Provides **Constant classes** : Classes to use in the project
 * Provides **Generic classes** : Controller, Service, Repository, Entity, Validator, Util, DTO, ...
+* Provides **Validation with Annotations** 
 * Provides a **Generic exception** "MessageApiCrudException" with type (Enumerate)
 * Provides **Properties Configuration File** with **Environment** (application-{environment}.yml)
 * Provides **Log Configuration File** (logback.yml)
@@ -50,6 +51,8 @@ Third Party Dependencies
 * **spring-boot-devtools** [Spring Boot Version] : Spring Boot Dev tools Library
 * **spring-boot-starter-actuator** [Spring Boot Version] : Spring Boot Actuators Library
 * **spring-boot-starter-data-jpa** [Spring Boot Version] : Spring Boot Persistence Library
+* **spring-boot-starter-validation** [Spring Boot Version] : Spring Boot Validation Library
+
 
 * **h2** [Spring Boot Version] : Database in-memory
 * **liquibase-core** [Spring Boot Version] : Database changes manager
@@ -174,6 +177,16 @@ Use default environment -> dev or <id_profile> environment
 ## Use
 
 Important : Beware of the configured port in the application-{id_profile}.yml
+
+Directory : src/main/resources
+
+* Optional : Use environment variables in properties with ${VARIABLE:DEFAULT_VALUE}
+* Optional : Use external properties -> going outside jar/war
+
+```bash
+java -jar target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar -Dspring.config.additional-location="C:/myapp/path/to/config/"
+```
+
 
 
 ### Use Browser

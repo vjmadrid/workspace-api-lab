@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ import com.acme.message.api.restful.crud.validator.UserMessageValidator;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -49,7 +51,7 @@ public class UserMessageController {
 	@Autowired
 	private UserMessageService userMessageService;
 	
-	@ApiOperation(value = "Find All UserMessages", notes = "Notes XXX", tags = { "usermessage" })
+	@ApiOperation(value = "Find All UserMessages", notes = "Returns a list", tags = { "usermessage" })
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Successful operation", response=List.class )  }
     )	    
@@ -72,8 +74,14 @@ public class UserMessageController {
 		return messageSource.getMessage(type, pks, RequestContextUtils.getLocale(request));
 	}
 
+	@ApiOperation(value = "Find UserMessage by ID", notes = "Returns a single UserMessage", tags = { "usermessage" })
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "successful operation", response=UserMessage.class),
+        @ApiResponse(code = 404, message = "UserMessage not found") })
 	@RequestMapping(value = UserMessageRestApiConstant.MAPPING_PK, method = RequestMethod.GET)
-	public ResponseEntity<?> findByPk(@PathVariable("id") long id, HttpServletRequest request) {
+	public ResponseEntity<?> findByPk(
+			@ApiParam("Id of the UserMessage to be obtained. Cannot be empty.")
+			@PathVariable("id") long id, HttpServletRequest request) {
 		LOG.info("Fetching UserMessage with id {}", id);
 		
 		final Optional<UserMessage> userMessageFound = userMessageService.findByPK(id);
@@ -93,7 +101,7 @@ public class UserMessageController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> insert(@RequestBody UserMessage userMessage, UriComponentsBuilder ucBuilder,
+	public ResponseEntity<?> insert(@Valid @RequestBody UserMessage userMessage, UriComponentsBuilder ucBuilder,
 			HttpServletRequest request) {
 		LOG.info("Creating UserMessage : {}", userMessage);
 		

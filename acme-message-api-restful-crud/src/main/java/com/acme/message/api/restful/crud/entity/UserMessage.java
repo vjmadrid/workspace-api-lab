@@ -15,6 +15,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.acme.message.api.restful.crud.validator.annotation.UserMessageIdExisting;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -26,6 +27,7 @@ public class UserMessage extends AbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@UserMessageIdExisting
 	private Long id;
 	
 	@Column(name = "description")
