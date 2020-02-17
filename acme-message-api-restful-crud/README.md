@@ -274,7 +274,7 @@ The service will accept HTTP GET requests at :
 http://localhost:8091/v2/api-docs
 ```
 
-And return JSON with meta inforamtion of the API
+And return JSON with meta information of the API
 
 
 Launching swagger UI swagger-ui.html
