@@ -1,0 +1,47 @@
+WITHOUT RESOURCE FILTER (EXCLUDE) 
+
+***	CASE DEFAULT EXECUTION (DEV Environment) ***
+
+			mvn clean install
+
+			mvn clean package
+		
+		
+	COMMAND LINE
+		
+
+ID		PARAMETER					VALUE		COMMAND																								RESULT		ENVIRONMENT
+
+1		N/A							N/A			java -jar target/acme-greeting-api-restful-deployment.jar											OK			DEFAULT/DEV 
+	
+2		--spring.config.name		NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar --spring.config.name=qa					ERROR		DEFAUL LOGO SPRING +  No active profile set, falling back to default profiles: default
+3		--spring.config.name		NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar --spring.config.name=application-qa		ERROR		DEFAUL LOGO SPRING +  No active profile set, falling back to default profiles: default
+4		--spring.config.name		NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar --spring.config.name=uat					ERROR		DEFAUL LOGO SPRING +  No active profile set, falling back to default profiles: default
+5		--spring.config.name		VALID		java -jar target/acme-greeting-api-restful-deployment.jar --spring.config.name=application-uat		OK			UAT
+		
+6		-Dspring.profiles.active	NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar -Dspring.profiles.active=qa				OK			DEFAULT/DEV 
+7		-Dspring.profiles.active	NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar -Dspring.profiles.active=application-qa	OK			DEFAULT/DEV
+8		-Dspring.profiles.active	VALID		java -jar target/acme-greeting-api-restful-deployment.jar -Dspring.profiles.active=uat				OK			DEFAULT/DEV
+9		-Dspring.profiles.active	VALID		java -jar target/acme-greeting-api-restful-deployment.jar -Dspring.profiles.active=application-uat	OK			DEFAULT/DEV
+				
+				
+				
+***	CASE PROD EXECUTION (PROD Environment) ***		
+
+			mvn clean package -Pprod
+	
+
+ID		PARAMETER					VALUE		COMMAND																								RESULT		ENVIRONMENT
+
+1		N/A							N/A			java -jar target/acme-greeting-api-restful-deployment.jar											OK			DEFAULT/DEV
+
+2		--spring.config.name		NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar --spring.config.name=qa					ERROR		DEFAUL LOGO SPRING +  No active profile set, falling back to default profiles: default
+3		--spring.config.name		NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar --spring.config.name=application-qa		ERROR		DEFAUL LOGO SPRING +  No active profile set, falling back to default profiles: default
+4		--spring.config.name		NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar --spring.config.name=uat					ERROR		DEFAUL LOGO SPRING +  No active profile set, falling back to default profiles: default
+5		--spring.config.name		VALID		java -jar target/acme-greeting-api-restful-deployment.jar --spring.config.name=application-uat		OK			UAT
+		
+6		-Dspring.profiles.active	NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar -Dspring.profiles.active=qa				OK			DEFAULT/DEV
+7		-Dspring.profiles.active	NO_VALID	java -jar target/acme-greeting-api-restful-deployment.jar -Dspring.profiles.active=application-qa	OK			DEFAULT/DEV
+8		-Dspring.profiles.active	VALID		java -jar target/acme-greeting-api-restful-deployment.jar -Dspring.profiles.active=uat				OK			DEFAULT/DEV
+9		-Dspring.profiles.active	VALID		java -jar target/acme-greeting-api-restful-deployment.jar -Dspring.profiles.active=application-uat	OK			DEFAULT/DEV
+10		-Dspring.profiles.active	VALID		java -jar target/acme-greeting-api-restful-deployment.jar -Dspring.profiles.active=prod				OK			DEFAULT/DEV

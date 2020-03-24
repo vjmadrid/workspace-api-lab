@@ -8,17 +8,17 @@ And you receive : {"id":1,"content":"Hello, World!","responseTime":"???"}
 
 This projects stands out for:
 
-* Provides **Configuration classes** : Classes to configure the project (scanning package,...)
-* Provides **Constant classes** : Classes to configure the project
-* Provides **Basic classes** : Controller and Entity
-* Provides **Properties Configuration File** with **Environment** (application-{environment}.yml)
-* Provides **Log Configuration File** (logback.yml)
-* Provides **Spring/Maven Profile Integration**
-* Provides **Swagger** for document the Restful API
-* Provides **Verify Files / Content with Verifier**
-* Provides **Standard Surefire Test Filter with Profiles** (unit & integration test)
-* Provides **Code Coverage with JACOCO** 
-* Provides **Dockerfile**
+* Provide **Configuration classes** : Classes to configure the project (scanning package,...)
+* Provide **Constant classes** : Classes to configure the project
+* Provide **Basic classes** : Controller and Entity
+* Provide **Properties Configuration File** with **Environment** (application-{environment}.yml)
+* Provide **Log Configuration File** (logback.yml)
+* Provide **Spring/Maven Profile Integration**
+* Provide **Swagger** for document the Restful API
+* Provide **Verify Files / Content with Verifier**
+* Provide **Standard Surefire Test Filter with Profiles** (unit & integration test)
+* Provide **Code Coverage with JACOCO** 
+* Provide **Dockerfile**
 
 
 
@@ -28,7 +28,7 @@ This projects stands out for:
 
 * Java 8
 * [Maven 3](https://maven.apache.org/) - Dependency Management
-* [Spring Boot](https://spring.io/projects/spring-boot) 2.0.0.RELEASE
+* [Spring Boot](https://spring.io/projects/spring-boot) 2.2.0.RELEASE
 * [Spring](https://spring.io)
 * [Docker](https://www.docker.com/) - Container Technology
 
@@ -38,14 +38,15 @@ N/A
 
 Third Party Dependencies
 
-* **spring-boot-starter** [Spring Boot Version] : Spring Boot + Spring Framework
-* **spring-boot-starter-test** [Spring Boot Version] : Spring Boot testing library
-* **spring-boot-starter-web** [Spring Boot Version] : Spring Boot web library
-* **spring-boot-devtools** [Spring Boot Version] : Spring Boot Dev tools Library
-* **spring-boot-starter-actuator** [Spring Boot Version] : Spring Boot Actuators Library
+* **spring-boot-starter-parent** [2.2.0.RELEASE] : Spring Boot + Spring Framework
+* **spring-boot-starter** [X] : Spring Boot Basic core
+* **spring-boot-starter-test** [X] : Spring Boot testing library
+* **spring-boot-starter-web** [X] : Spring Boot web library
+* **spring-boot-devtools** [X] : Spring Boot Dev tools Library
+* **spring-boot-starter-actuator** [X] : Spring Boot Actuators Library
 
-* **springfox-swagger2** [2.4.0] : Swagger
-* **springfox-swagger-ui** [2.4.0] : Swagger UI
+* **springfox-swagger2** [2.9.2] : Swagger
+* **springfox-swagger-ui** [2.9.2] : Swagger UI
 
 
 

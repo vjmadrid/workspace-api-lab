@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="LOG_DIR" value="logs" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+    		<charset>UTF-8</charset>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    	</encoder>
+  	</appender>
+  	
+	<logger name="com.acme.greeting.api.restful.deployment" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    
+    
+	<springProfile name="dev">
+		<root level="INFO">
+			<appender-ref ref="STDOUT"/>
+		</root>
+	</springProfile>
+
+	<springProfile name="pro">
+		<root level="ERROR">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="FILE_INFO" />
+		</root>
+	</springProfile>
+
+</configuration>

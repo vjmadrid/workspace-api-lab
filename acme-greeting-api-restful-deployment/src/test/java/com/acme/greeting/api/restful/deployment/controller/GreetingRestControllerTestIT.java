@@ -1,4 +1,4 @@
-package com.acme.greeting.api.restful;
+package com.acme.greeting.api.restful.deployment.controller;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
@@ -15,7 +15,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.acme.greeting.api.restful.constant.GreetingRestApiConstant;
+import com.acme.greeting.api.restful.deployment.constant.GreetingRestApiConstant;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

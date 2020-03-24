@@ -1,4 +1,4 @@
-package com.acme.greeting.api.restful;
+package com.acme.greeting.api.restful.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

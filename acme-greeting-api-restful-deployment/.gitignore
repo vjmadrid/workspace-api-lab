@@ -16,14 +16,12 @@
 *.rar
 
 ### Eclipse ###
-.metadata/
+.metadata
 .settings/
 .project
 .classpath
 .loadpath
 .recommenders
-.sts4-cache/
-.factorypath
 
 target/
 bin/
