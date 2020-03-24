@@ -2,6 +2,21 @@ WITHOUT RESOURCE FILTER (EXCLUDE)
 
 ***	CASE DEFAULT EXECUTION (DEV Environment) ***
 
+			<resources>
+				<resource>
+					<directory>src/main/resources</directory>
+					<filtering>false</filtering>
+	
+					<!--
+					<excludes>
+	                	<exclude>**/*-uat.properties</exclude>
+	            	</excludes>
+	            	--> 
+				</resource>
+			
+			</resources>
+
+
 			mvn clean install
 
 			mvn clean package
