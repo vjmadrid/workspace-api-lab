@@ -70,6 +70,14 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>pre</id>
+			<properties>
+				<spring.profiles.active>pre</spring.profiles.active>
+				<skip.unit.tests>true</skip.unit.tests>
+				<skip.integration.tests>true</skip.integration.tests>
+			</properties>
+		</profile>
+		<profile>
 			<id>prod</id>
 			<properties>
 				<spring.profiles.active>prod</spring.profiles.active>
@@ -83,7 +91,7 @@
 
 	<dependencies>
 
-		<!-- *** Architecture Libraries *** -->
+		<!-- *** Architecture libraries *** -->
 
 
 		<!-- *** Third Party Libraries *** -->
@@ -132,20 +140,12 @@
 
 		<!-- filtering resources-->
 		 
-		<!-- 
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
-
-				<excludes>
-                	<exclude>**/*-uat.properties</exclude>
-            	</excludes>
-            	 
 			</resource>
-		
 		</resources>
-		-->
 
 		<plugins>
 

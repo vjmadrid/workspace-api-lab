@@ -42,7 +42,7 @@ See [Spring framework properties documentation](https://docs.spring.io/spring-bo
 
 See [Spring Boot Externalized Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
 
-See [Profile-specific application properties] (https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config-profile-specific-properties)
+See [Profile-specific application properties](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config-profile-specific-properties)
 
 1) Command line arguments
 2) Properties from SPRING_APPLICATION_JSON
@@ -357,12 +357,14 @@ java -jar exampleApp.jar
 
 Example
 
+Important : Exist problems with the parameter position
+
 ```bash
 
 # Optional resource filtering
 mvn clean package -Pxxx 
 
-java -jar exampleApp.jar -Dspring.profiles.active=xxx 
+java -jar -Dspring.profiles.active=xxx  exampleApp.jar
 ```
 
 
@@ -384,7 +386,7 @@ java -jar exampleApp.jar --spring.config.location=classpath:/data/example/config
 ```
 
 
-* Loading a specific folder + especific names
+* Loading a specific folder + specific names
 
 Example
 
@@ -393,7 +395,7 @@ java -jar exampleApp.jar --spring.config.name=xxx,yyy --spring.config.location=f
 ```
 
 
-* Loading a specific folder + especific names
+* Loading a specific folder + specific names
 
 Example
 
@@ -409,6 +411,8 @@ Example
 ```bash
 mvn spring-boot:run -Dspring.config.location="file:///Users/home/application-qa.properties"
 ```
+
+
 
 
 
@@ -542,9 +546,6 @@ Execute
 java -jar target/acme-greeting-api-restful-deployment-0.0.1-SNAPSHOT.jar
 ```
 
-Use default environment -> dev or <id_profile> environment
-
-
 
 
 
@@ -589,6 +590,31 @@ curl -X GET http://localhost:8091/greeting
 or
 
 curl -X GET http://localhost:8091/greeting?name=Acme
+```
+
+
+
+### Use Load External Configuration
+
+Steps to follow
+
+* Start a terminal
+* To be located in the PATH of installation (the place where the project is located)
+* Verify that the file "pom.xml" is available
+* Verify that the folder "example-external-config" is avilable
+* Verify default construction is in this place
+* Verify external config file -> /custom-config
+
+Execute the following command
+
+```bash
+java -jar acme-greeting-api-restful-deployment.jar --spring.profiles.active=pre --spring.config.location=file:./custom-config/
+
+java -jar acme-greeting-api-restful-deployment.jar --spring.profiles.active=pre --spring.config.location=file:./custom-config/application-pre.yml
+
+java -jar -Dspring.profiles.active=pre -Dspring.config.location=file:./custom-config/ acme-greeting-api-restful-deployment.jar
+
+java -jar -Dspring.profiles.active=pre -Dspring.config.location=file:./custom-config/application-pre.yml acme-greeting-api-restful-deployment.jar
 ```
 
 
