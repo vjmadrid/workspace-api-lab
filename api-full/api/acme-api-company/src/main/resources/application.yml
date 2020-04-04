@@ -1,0 +1,93 @@
+#DEFAULT ENVIRONEMNT SETTING
+server:
+   port: 8091
+   
+spring:
+   main:
+      banner-mode: "off"
+   profiles:
+      active: "@spring.profiles.active@"
+   banner:
+      location: classpath:custom-banner.txt
+   h2:
+      console:
+         enabled : true
+   liquibase:
+      enabled: true
+      change-log: classpath:db/changelog/liquibase-changeLog.xml
+   jpa:
+      database: DEFAULT
+      hibernate:
+         dialect: org.hibernate.dialect.H2Dialect
+         show-sql: true
+         hbm2ddl:
+            auto: create-drop
+         naming:
+            physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      properties:
+         hibernate:
+            format_sql: false
+            generate_statistics: false
+   datasource:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:mem:DAE;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=true;INIT=CREATE SCHEMA IF NOT EXISTS dbo
+      username: sa
+      password: sa
+      drop-first: true
+      default-schema: dbo
+
+security:
+   basic:
+      enabled: false
+
+management:
+   server:
+      port: 8091        # Actuator port
+   endpoint:             # Enabling Endpoints
+      shutdown:
+         enabled: true   # Configure "shutdown" enabled (By default all endpoints are enabled except shutdown) 
+      info:
+         enabled: true
+   endpoints:
+      web:
+         base-path: /manage
+         exposure:
+            include: health, info, beans, shutdown # Include endpints in web mode
+   security:
+      enabled: false # management port is internal only. no need to secure it 
+
+#Swagger info
+swagger:
+   info:
+      title: CRUD Company API
+      description: Company API Description
+      produce-consume: application/json
+      version: 1.0
+      terms: urn:tos
+      contact:
+         name: Cistec
+         url: https://www.acme.es
+         email: global@acme.corp.com
+      license: Apache 2.0
+      license-url: http://www.apache.org/licenses/LICENSE-2.0
+      protocols: http
+      response401: The request has not been applied because it lacks valid authentication credentials for the target resource
+      response403: The server understood the request but refuses to authorize it
+      response404: The origin server did not find a current representation
+      response405: The method received in the request-line is known by the origin server but not    supported by the target resource.
+      response409: The request could not be completed due to a conflict with the current state of the target 
+      response415: The origin server is refusing to service the request because the payload is in a format not supported 
+      response429: Too many requests in a given amount of time
+      response500: The server encountered an unexpected condition
+
+
+# Service info
+info:
+   app:
+      artifact: "@project.artifactId@"
+      name: "@project.name@"
+      description: "@project.description@"
+      version: "@project.version@"
+      java: "@java.version@"
+      encoding: "@project.build.sourceEncoding@"
+      environment: "LOCAL"

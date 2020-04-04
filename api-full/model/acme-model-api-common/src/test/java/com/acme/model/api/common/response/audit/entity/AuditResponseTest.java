@@ -11,8 +11,8 @@ import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.acme.model.api.common.response.audit.constant.DummyAuditResponseConstant;
-import com.acme.model.api.common.response.audit.factory.DummyAuditResponseDataFactory;
+import com.acme.model.api.common.response.audit.constant.dummy.DummyAuditModelConstant;
+import com.acme.model.api.common.response.audit.factory.dummy.DummyAuditResponseDataFactory;
 
 public class AuditResponseTest {
 	
@@ -34,7 +34,7 @@ public class AuditResponseTest {
 	
 	@Test
 	public void whenCallAConstructorWithParameters_ThenReturnObject() {
-		AuditResponse result =  new AuditResponse(DummyAuditResponseConstant.CREATED_BY,new Date(),null, null);
+		AuditResponse result =  new AuditResponse(DummyAuditModelConstant.CREATED_BY,new Date(),null, null);
 		
 		assertNotNull(result);
 		assertNotNull(result.getCreatedBy());
@@ -70,7 +70,7 @@ public class AuditResponseTest {
 	
 	@Test
 	public void whenCallAToString_ThenReturnStringWithField() {
-		System.out.println("*** "+entity.toString());
+		//System.out.println("*** "+entity.toString());
 		assertTrue(entity.toString().contains(VALIDATION_FIELD_CONTAINS_TO_STRING));
 	}
 

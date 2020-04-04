@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.acme.architecture.testing.util.JUnitTestUtil;
-import com.acme.model.api.common.response.audit.constant.DummyAuditResponseConstant;
+import com.acme.model.api.common.response.audit.constant.dummy.DummyAuditModelConstant;
 import com.acme.model.api.common.response.audit.entity.AuditResponse;
 
 public class AuditResponseDataFactoryTest {
@@ -37,21 +37,21 @@ public class AuditResponseDataFactoryTest {
 	
 	@Test
 	public void whenCallACreate_ThenCreateAuditResponse() {
-		AuditResponse result = AuditResponseDataFactory.create(DummyAuditResponseConstant.CREATED_BY);
+		AuditResponse result = AuditResponseDataFactory.create(DummyAuditModelConstant.CREATED_BY);
 		
 		assertNotNull(result);
-		assertEquals(DummyAuditResponseConstant.CREATED_BY,result.getCreatedBy());
+		assertEquals(DummyAuditModelConstant.CREATED_BY,result.getCreatedBy());
 		assertNotNull(result.getCreatedAt());
 	}
 	
 	@Test
 	public void whenCallACreateUpdated_ThenCreateAuditResponse() {
-		AuditResponse result = AuditResponseDataFactory.createUpdated(DummyAuditResponseConstant.CREATED_BY, DummyAuditResponseConstant.MODIFIED_BY);
+		AuditResponse result = AuditResponseDataFactory.createUpdated(DummyAuditModelConstant.CREATED_BY, DummyAuditModelConstant.MODIFIED_BY);
 		
 		assertNotNull(result);
-		assertEquals(DummyAuditResponseConstant.CREATED_BY,result.getCreatedBy());
+		assertEquals(DummyAuditModelConstant.CREATED_BY,result.getCreatedBy());
 		assertNotNull(result.getCreatedAt());
-		assertEquals(DummyAuditResponseConstant.CREATED_BY,result.getModifiedBy());
+		assertEquals(DummyAuditModelConstant.CREATED_BY,result.getModifiedBy());
 		assertNotNull(result.getModifiedAt());
 	}
 	

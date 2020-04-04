@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.acme.model.api.company.constant.DummyCompanyConstant;
-import com.acme.model.api.company.factory.DummyCompanyRequestDataFactory;
+import com.acme.model.api.company.constant.dummy.DummyCompanyModelConstant;
+import com.acme.model.api.company.factory.dummy.DummyCompanyRequestDataFactory;
 
 public class CompanyRequestTest {
 	
@@ -31,7 +31,7 @@ public class CompanyRequestTest {
 	
 	@Test
 	public void whenCallAConstructorWithParameters_ThenReturnObject() {
-		CompanyRequest result =  new CompanyRequest(DummyCompanyConstant.COMPANY_NAME);
+		CompanyRequest result =  new CompanyRequest(DummyCompanyModelConstant.COMPANY_NAME);
 		
 		assertNotNull(result);
 		assertNotNull(result.getCompanyName());
@@ -64,7 +64,7 @@ public class CompanyRequestTest {
 	
 	@Test
 	public void whenCallAToString_ThenReturnStringWithField() {
-		System.out.println("*** "+entity.toString());
+		//System.out.println("*** "+entity.toString());
 		assertTrue(entity.toString().contains(VALIDATION_FIELD_CONTAINS_TO_STRING));
 	}
 

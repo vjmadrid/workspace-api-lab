@@ -1,6 +1,6 @@
 package com.acme.model.api.company.entity;
 
-import com.acme.architecture.common.entity.AbstractEntity;
+import com.acme.model.api.common.response.audit.entity.AuditResponse;
 import com.acme.model.api.company.constant.CompanyJsonFieldConstant;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,9 +15,9 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class CompanyResponse extends AbstractEntity {
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class CompanyResponse extends AuditResponse {
 
 	private static final long serialVersionUID = -5997995476333537667L;
 

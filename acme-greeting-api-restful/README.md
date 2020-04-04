@@ -28,7 +28,7 @@ This projects stands out for:
 
 * Java 8
 * [Maven 3](https://maven.apache.org/) - Dependency Management
-* [Spring Boot](https://spring.io/projects/spring-boot) 2.2.0.RELEASE
+* [Spring Boot](https://spring.io/projects/spring-boot)
 * [Spring](https://spring.io)
 * [Docker](https://www.docker.com/) - Container Technology
 

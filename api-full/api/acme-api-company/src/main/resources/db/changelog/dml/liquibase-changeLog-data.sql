@@ -1,0 +1,3 @@
+INSERT INTO Company (CompanyId, CompanyName, CreatedBy, CreatedAt, ModifiedBy, ModifiedAt) VALUES (1, 'Company 1', 'user 1', '2020-01-01T09:30:30.000', NULL, NULL);
+INSERT INTO Company (CompanyId, CompanyName, CreatedBy, CreatedAt, ModifiedBy, ModifiedAt) VALUES (2, 'Company 2', 'user 1', '2020-01-02T10:00:00.000', NULL, NULL);
+INSERT INTO Company (CompanyId, CompanyName, CreatedBy, CreatedAt, ModifiedBy, ModifiedAt) VALUES (3, 'Company 3', 'user 1', '2020-01-03T10:30:00.000', NULL, NULL);

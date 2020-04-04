@@ -11,7 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.junit.jupiter.api.Test;
 
 import com.acme.architecture.testing.util.JUnitTestUtil;
-import com.acme.model.api.company.constant.DummyCompanyConstant;
+import com.acme.model.api.company.constant.dummy.DummyCompanyModelConstant;
 import com.acme.model.api.company.entity.CompanyRequest;
 
 public class CompanyRequestDataFactoryTest {
@@ -31,10 +31,10 @@ public class CompanyRequestDataFactoryTest {
 
 	@Test
 	public void whenCallACreate_ThenCreateCompanyResponse() {
-		CompanyRequest result = CompanyRequestDataFactory.create(DummyCompanyConstant.COMPANY_NAME);
+		CompanyRequest result = CompanyRequestDataFactory.create(DummyCompanyModelConstant.COMPANY_NAME);
 		
 		assertNotNull(result);
-		assertEquals(DummyCompanyConstant.COMPANY_NAME,result.getCompanyName());
+		assertEquals(DummyCompanyModelConstant.COMPANY_NAME,result.getCompanyName());
 	}
 	
 }
