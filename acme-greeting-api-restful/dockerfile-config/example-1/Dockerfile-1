@@ -12,4 +12,10 @@ ADD /target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar acme-greeting-api-restf
 
 ENTRYPOINT ["java","-jar","acme-greeting-api-restful-0.0.1-SNAPSHOT.jar"]
 
+# Case 2 : without a specific version
+
+#ADD /target/acme-greeting-api-restful-*.jar acme-greeting-api-restful.jar
+
+#ENTRYPOINT ["java","-jar","acme-greeting-api-restful.jar"]
+
 EXPOSE 8091

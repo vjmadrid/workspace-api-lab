@@ -125,7 +125,10 @@
 	</dependencies>
 
 	<build>
+
+		<!--
 		<finalName>acme-greeting-api-restful</finalName>
+		-->
 
 		<resources>
 			<resource>

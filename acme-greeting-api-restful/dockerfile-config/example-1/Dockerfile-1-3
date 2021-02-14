@@ -1,15 +1,21 @@
 #  DESCRIPTION
 #   * One-Stage
 #   * Aproach : RUNTIME 
-#   * Use a non-optimized image
+#   * Use a optimized image JRE
 #   * Requires the artifact to be pre-generated
 #   * Problems with artifact selection
 
-FROM openjdk:8-jdk
+FROM openjdk:8-jre-slim
 
 # Case 1 : with a specific version
 ADD /target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar acme-greeting-api-restful-0.0.1-SNAPSHOT.jar
 
 ENTRYPOINT ["java","-jar","acme-greeting-api-restful-0.0.1-SNAPSHOT.jar"]
+
+# Case 2 : without a specific version
+
+#ADD /target/acme-greeting-api-restful-*.jar acme-greeting-api-restful.jar
+
+#ENTRYPOINT ["java","-jar","acme-greeting-api-restful.jar"]
 
 EXPOSE 8091

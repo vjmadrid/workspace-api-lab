@@ -1,0 +1,85 @@
+# **********************************************
+# ****             Multi-Stage               ***
+# **********************************************
+
+# Allows the reuse of artifacts produced in one stage by another stage -> can help creating smaller images
+
+ARG BUILD_IMAGE=maven:3.6.3-openjdk-8-slim
+ARG RUNTIME_IMAGE=openjdk:8-jdk-alpine
+
+
+
+# **********************************************
+# **** Stage 1 : pull all maven dependencies ***
+# **********************************************
+
+FROM ${BUILD_IMAGE} as dependencies
+
+ARG PROXY_SET=false
+ARG PROXY_HOST=
+ARG PROXY_PORT=
+
+COPY pom.xml ./
+
+RUN mvn -B dependency:go-offline \
+        -DproxySet=${PROXY_SET} \
+        -DproxyHost=${PROXY_HOST} \
+        -DproxyPort=${PROXY_PORT}
+
+
+
+# **********************************************
+# **** Stage 2 : build                       ***
+# **********************************************
+
+FROM dependencies as build
+
+ARG PROXY_SET=false
+ARG PROXY_HOST=
+ARG PROXY_PORT=
+
+COPY src ./src
+
+RUN mvn -B clean package \
+        -DproxySet=${PROXY_SET} \
+        -DproxyHost=${PROXY_HOST} \
+        -DproxyPort=${PROXY_PORT}
+
+
+
+
+# **********************************************
+# **** Stage 3 : Sonar                      ***
+# **********************************************
+
+FROM build
+
+ARG SONAR_ENABLED=true
+ARG SONAR_URL=
+ARG SONAR_ORGANIZATION=
+ARG SONAR_USERNAME=
+ARG SONAR_PASSWORD=
+ARG SONAR_BRANCH=
+
+RUN if [ "$SONAR_ENABLED" = "true" ] ; \
+    then mvn -B sonar:sonar \
+        -Dsonar.host.url=${SONAR_URL} \
+        -Dsonar.organization=${SONAR_ORGANIZATION} \
+        -Dsonar.branch.name=${SONAR_BRANCH} \
+        -Dsonar.login=${SONAR_USERNAME} \
+        -Dsonar.password=${SONAR_PASSWORD}; \
+    fi
+
+
+
+# **********************************************
+# **** Stage 4 : Deploy                      ***
+# **********************************************
+
+FROM ${RUNTIME_IMAGE}
+
+EXPOSE 8091
+
+COPY --from=build /target/acme-greeting-api-restful*.jar /app/service.jar
+
+CMD ["/usr/bin/java", "-jar", "/app/service.jar"]

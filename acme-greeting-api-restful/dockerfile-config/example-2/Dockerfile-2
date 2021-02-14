@@ -1,0 +1,17 @@
+#  DESCRIPTION
+#   * One-Stage
+#   * Aproach : BUILD + RUNTIME 
+#   * Use a optimized image
+#   * Copy the entire project
+#   * NO external artifact required
+#   * Problems with artifact selection
+
+FROM maven:3.6.3-openjdk-8-slim
+
+COPY ./ ./
+
+RUN mvn package
+
+ENTRYPOINT ["java","-jar","./target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar"]
+
+EXPOSE 8091
