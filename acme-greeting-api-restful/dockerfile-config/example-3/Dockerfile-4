@@ -13,6 +13,7 @@ ARG RUNTIME_IMAGE=openjdk:8-jdk-alpine
 # **** Stage 1 : pull all maven dependencies ***
 # **********************************************
 
+# Pull official base image
 FROM ${BUILD_IMAGE} as dependencies
 
 ARG PROXY_SET=false

@@ -1,13 +1,26 @@
 #  DESCRIPTION
 #   * One-Stage
-#   * Aproach : BUILD + RUNTIME 
+#   * Aproach : BUILD + RUNTIME
 #   * Use a optimized image
 #   * Selective file copying : pom and src
 #   * NO external artifact required
 #   * Problems with artifact selection
 #   * Build all dependencies for offline use : dependency:go-offline
 
+# Pull official base image
 FROM maven:3.6.3-openjdk-8-slim
+
+
+
+# ***************************
+# *** Prepare Environment ***
+# ***************************
+
+
+
+# ********************
+# *** Prepare Code ***
+# ********************
 
 COPY ./pom.xml ./pom.xml
 
@@ -18,6 +31,12 @@ RUN mvn dependency:resolve -e -B
 COPY ./src ./src
 
 RUN mvn package
+
+
+
+# ***************
+# *** Execute ***
+# ***************
 
 ENTRYPOINT ["java","-jar","./target/acme-greeting-api-restful-0.0.1-SNAPSHOT.jar"]
 
